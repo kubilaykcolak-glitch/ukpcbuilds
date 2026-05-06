@@ -217,11 +217,11 @@ export default function BuilderClient() {
   const totalDowngradeSaving = downgradeOptions.reduce((s, o) => s + o.saving, 0);
 
   function applyDowngrade(partType: string) {
-    setAppliedDowngrades((prev) => new Set([...prev, partType]));
+    setAppliedDowngrades((prev) => new Set(Array.from(prev).concat(partType)));
   }
   function applyAllDowngrades() {
     setAppliedDowngrades((prev) =>
-      new Set([...prev, ...downgradeOptions.map((o) => o.part.type)])
+      new Set(Array.from(prev).concat(downgradeOptions.map((o) => o.part.type)))
     );
   }
 
