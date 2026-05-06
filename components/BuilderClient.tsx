@@ -117,10 +117,7 @@ export default function BuilderClient() {
   );
   const [email, setEmail]       = useState("");
   const [subscribed, setSubscribed] = useState(false);
-  const [controlsOpen, setControlsOpen] = useState(
-    // if arriving from homepage with params, start controls collapsed
-    () => !(searchParams.get("budget") || searchParams.get("use"))
-  );
+  const [controlsOpen, setControlsOpen] = useState(true);
 
   const resultsRef = useRef<HTMLDivElement>(null);
 
@@ -196,12 +193,19 @@ export default function BuilderClient() {
                 <span className="text-[#94A3B8] text-sm">{ucMeta.label}</span>
               </div>
               <h1 className="text-2xl sm:text-3xl font-extrabold text-white">
-                Your recommended build
+                Best build for your{" "}
+                <span className="text-[#2563EB]">£{budget.toLocaleString("en-GB")}</span>{" "}
+                budget
               </h1>
             </div>
-            <p className="text-3xl font-extrabold text-white shrink-0">
-              <span className="text-[#2563EB]">£{currentBuild.total.toLocaleString("en-GB")}</span>
-            </p>
+            <div className="text-right shrink-0">
+              <p className="text-3xl font-extrabold text-[#2563EB]">
+                £{currentBuild.total.toLocaleString("en-GB")}
+              </p>
+              <p className="text-xs text-[#64748B] mt-1">
+                build cost · within your budget
+              </p>
+            </div>
           </div>
 
           {/* ── Parts table ─────────────────────────────────────────── */}
@@ -335,9 +339,6 @@ export default function BuilderClient() {
               <div className="flex items-center gap-3">
                 <SlidersHorizontal className="w-4 h-4 text-[#2563EB]" aria-hidden />
                 <span className="font-semibold text-white">Adjust your build</span>
-                <span className="text-xs text-[#64748B]">
-                  £{budget.toLocaleString("en-GB")} · {ucMeta.label}
-                </span>
               </div>
               <span className="text-[#94A3B8] text-sm">{controlsOpen ? "▲" : "▼"}</span>
             </button>
