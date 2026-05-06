@@ -150,7 +150,7 @@ export default function HomePage() {
       {/* ═══════════════════════════════════════════════════════════════════
           SECTION 4 — BUY ME A COFFEE
       ════════════════════════════════════════════════════════════════════ */}
-      <section>
+      <section className="pt-16">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="max-w-xl mx-auto bg-[#1E293B] border border-[#334155] rounded-2xl px-8 py-8 flex flex-col sm:flex-row items-center gap-6 text-center sm:text-left">
             <span className="text-5xl shrink-0" aria-hidden="true">☕</span>
