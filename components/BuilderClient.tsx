@@ -213,6 +213,8 @@ export default function BuilderClient() {
   const effectiveTotal = effectiveParts.reduce((s, p) => s + p.price, 0);
 
   const balanceStatus = currentBuild ? getBalanceStatus(effectiveParts, useCase) : "unchecked";
+  const cpuForBalance = effectiveParts.find((p) => p.type === "CPU");
+  const gpuForBalance = effectiveParts.find((p) => p.type === "GPU");
 
   const isOverBudget = currentBuild !== null && effectiveTotal > budget;
   const overBy       = isOverBudget ? effectiveTotal - budget : 0;
@@ -377,23 +379,32 @@ export default function BuilderClient() {
             </div>
 
             {/* Right: balance status */}
-            {balanceStatus === "balanced" && (
-              <span className="inline-flex items-center gap-1.5 text-xs font-semibold bg-emerald-500/10 text-emerald-400 border border-emerald-500/25 px-3 py-1.5 rounded-full whitespace-nowrap">
-                <CheckCircle2 className="w-3.5 h-3.5" aria-hidden />
-                Balanced build
-              </span>
-            )}
-            {balanceStatus === "gpu-bottleneck" && (
-              <span className="inline-flex items-center gap-1.5 text-xs font-semibold bg-amber-500/10 text-amber-400 border border-amber-500/25 px-3 py-1.5 rounded-full whitespace-nowrap">
-                <AlertTriangle className="w-3.5 h-3.5" aria-hidden />
-                GPU is limiting — consider a GPU upgrade
-              </span>
-            )}
-            {balanceStatus === "cpu-bottleneck" && (
-              <span className="inline-flex items-center gap-1.5 text-xs font-semibold bg-amber-500/10 text-amber-400 border border-amber-500/25 px-3 py-1.5 rounded-full whitespace-nowrap">
-                <AlertTriangle className="w-3.5 h-3.5" aria-hidden />
-                CPU is limiting — consider a CPU upgrade
-              </span>
+            {balanceStatus !== "unchecked" && (
+              <div className="flex items-center gap-2 flex-wrap sm:justify-end">
+                {cpuForBalance?.perfTier && gpuForBalance?.perfTier && gpuForBalance.perfTier > 0 && (
+                  <span className="text-xs text-[#64748B] tabular-nums whitespace-nowrap">
+                    CPU T{cpuForBalance.perfTier} · GPU T{gpuForBalance.perfTier}
+                  </span>
+                )}
+                {balanceStatus === "balanced" && (
+                  <span className="inline-flex items-center gap-1.5 text-xs font-semibold bg-emerald-500/10 text-emerald-400 border border-emerald-500/25 px-3 py-1.5 rounded-full whitespace-nowrap">
+                    <CheckCircle2 className="w-3.5 h-3.5" aria-hidden />
+                    Balanced build
+                  </span>
+                )}
+                {balanceStatus === "gpu-bottleneck" && (
+                  <span className="inline-flex items-center gap-1.5 text-xs font-semibold bg-amber-500/10 text-amber-400 border border-amber-500/25 px-3 py-1.5 rounded-full whitespace-nowrap">
+                    <AlertTriangle className="w-3.5 h-3.5" aria-hidden />
+                    GPU is limiting — consider upgrading
+                  </span>
+                )}
+                {balanceStatus === "cpu-bottleneck" && (
+                  <span className="inline-flex items-center gap-1.5 text-xs font-semibold bg-amber-500/10 text-amber-400 border border-amber-500/25 px-3 py-1.5 rounded-full whitespace-nowrap">
+                    <AlertTriangle className="w-3.5 h-3.5" aria-hidden />
+                    CPU is limiting — consider upgrading
+                  </span>
+                )}
+              </div>
             )}
           </div>
 
