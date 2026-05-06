@@ -94,16 +94,67 @@ function snapTo50(v: number) {
   return Math.round(v / 50) * 50;
 }
 
-type BalanceStatus = "balanced" | "cpu-bottleneck" | "gpu-bottleneck" | "unchecked";
+const TIER_NAMES = ["", "Entry", "Budget", "Mid-Range", "High-End", "Enthusiast"] as const;
 
-function getBalanceStatus(parts: Part[], currentUseCase: UseCaseKey): BalanceStatus {
-  if (currentUseCase === "office") return "unchecked";
+interface CompatIssue {
+  partName: string;
+  partType: string;
+  message: string;
+  severity: "warning" | "critical";
+}
+
+interface BalanceInfo {
+  status: "balanced" | "unchecked" | "issues";
+  issues: CompatIssue[];
+}
+
+function getBalanceInfo(parts: Part[], currentUseCase: UseCaseKey): BalanceInfo {
+  if (currentUseCase === "office") return { status: "unchecked", issues: [] };
+
   const cpu = parts.find((p) => p.type === "CPU");
   const gpu = parts.find((p) => p.type === "GPU");
-  if (!cpu?.perfTier || !gpu?.perfTier || gpu.perfTier === 0) return "unchecked";
+
+  if (!cpu?.perfTier || !gpu?.perfTier || gpu.perfTier === 0) {
+    return { status: "unchecked", issues: [] };
+  }
+
+  const issues: CompatIssue[] = [];
   const gap = cpu.perfTier - gpu.perfTier;
-  if (gap === 0) return "balanced";
-  return gap > 0 ? "gpu-bottleneck" : "cpu-bottleneck";
+
+  if (gap > 1) {
+    issues.push({
+      partName: gpu.name,
+      partType: "GPU",
+      message: `${gpu.name} is ${TIER_NAMES[gpu.perfTier]} while your CPU is ${TIER_NAMES[cpu.perfTier]} — significant GPU bottleneck`,
+      severity: "critical",
+    });
+  } else if (gap === 1) {
+    issues.push({
+      partName: gpu.name,
+      partType: "GPU",
+      message: `${gpu.name} (${TIER_NAMES[gpu.perfTier]}) is a tier behind your ${TIER_NAMES[cpu.perfTier]} CPU — GPU is the limiting component`,
+      severity: "warning",
+    });
+  } else if (gap < -1) {
+    issues.push({
+      partName: cpu.name,
+      partType: "CPU",
+      message: `${cpu.name} is ${TIER_NAMES[cpu.perfTier]} while your GPU is ${TIER_NAMES[gpu.perfTier]} — significant CPU bottleneck`,
+      severity: "critical",
+    });
+  } else if (gap === -1) {
+    issues.push({
+      partName: cpu.name,
+      partType: "CPU",
+      message: `${cpu.name} (${TIER_NAMES[cpu.perfTier]}) is a tier behind your ${TIER_NAMES[gpu.perfTier]} GPU — CPU is the limiting component`,
+      severity: "warning",
+    });
+  }
+
+  return {
+    status: issues.length === 0 ? "balanced" : "issues",
+    issues,
+  };
 }
 
 function parseBudget(raw: string | null): number {
@@ -212,7 +263,7 @@ export default function BuilderClient() {
     : [];
   const effectiveTotal = effectiveParts.reduce((s, p) => s + p.price, 0);
 
-  const balanceStatus = currentBuild ? getBalanceStatus(effectiveParts, useCase) : "unchecked";
+  const balanceInfo = currentBuild ? getBalanceInfo(effectiveParts, useCase) : { status: "unchecked" as const, issues: [] };
   const cpuForBalance = effectiveParts.find((p) => p.type === "CPU");
   const gpuForBalance = effectiveParts.find((p) => p.type === "GPU");
 
@@ -379,31 +430,38 @@ export default function BuilderClient() {
             </div>
 
             {/* Right: balance status */}
-            {balanceStatus !== "unchecked" && (
-              <div className="flex items-center gap-2 flex-wrap sm:justify-end">
+            {balanceInfo.status !== "unchecked" && (
+              <div className="flex flex-col items-start sm:items-end gap-2">
+                {/* Tier summary */}
                 {cpuForBalance?.perfTier && gpuForBalance?.perfTier && gpuForBalance.perfTier > 0 && (
                   <span className="text-xs text-[#64748B] whitespace-nowrap">
-                    CPU: {["","Entry","Budget","Mid-Range","High-End","Enthusiast"][cpuForBalance.perfTier]} · GPU: {["","Entry","Budget","Mid-Range","High-End","Enthusiast"][gpuForBalance.perfTier]}
+                    CPU: {TIER_NAMES[cpuForBalance.perfTier]} · GPU: {TIER_NAMES[gpuForBalance.perfTier]}
                   </span>
                 )}
-                {balanceStatus === "balanced" && (
+
+                {/* Balanced */}
+                {balanceInfo.status === "balanced" && (
                   <span className="inline-flex items-center gap-1.5 text-xs font-semibold bg-emerald-500/10 text-emerald-400 border border-emerald-500/25 px-3 py-1.5 rounded-full whitespace-nowrap">
                     <CheckCircle2 className="w-3.5 h-3.5" aria-hidden />
                     Balanced build
                   </span>
                 )}
-                {balanceStatus === "gpu-bottleneck" && (
-                  <span className="inline-flex items-center gap-1.5 text-xs font-semibold bg-amber-500/10 text-amber-400 border border-amber-500/25 px-3 py-1.5 rounded-full whitespace-nowrap">
-                    <AlertTriangle className="w-3.5 h-3.5" aria-hidden />
-                    GPU is limiting — consider upgrading
-                  </span>
-                )}
-                {balanceStatus === "cpu-bottleneck" && (
-                  <span className="inline-flex items-center gap-1.5 text-xs font-semibold bg-amber-500/10 text-amber-400 border border-amber-500/25 px-3 py-1.5 rounded-full whitespace-nowrap">
-                    <AlertTriangle className="w-3.5 h-3.5" aria-hidden />
-                    CPU is limiting — consider upgrading
-                  </span>
-                )}
+
+                {/* Per-part issues */}
+                {balanceInfo.issues.map((issue) => (
+                  <div
+                    key={issue.partType}
+                    className={clsx(
+                      "flex items-start gap-2 text-xs font-medium px-3 py-2 rounded-xl border max-w-xs sm:text-right",
+                      issue.severity === "critical"
+                        ? "bg-red-500/10 text-red-400 border-red-500/25"
+                        : "bg-amber-500/10 text-amber-400 border-amber-500/25"
+                    )}
+                  >
+                    <AlertTriangle className="w-3.5 h-3.5 shrink-0 mt-0.5" aria-hidden />
+                    <span className="leading-snug">{issue.message}</span>
+                  </div>
+                ))}
               </div>
             )}
           </div>
