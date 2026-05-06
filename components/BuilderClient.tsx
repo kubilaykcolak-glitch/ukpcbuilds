@@ -382,8 +382,8 @@ export default function BuilderClient() {
             {balanceStatus !== "unchecked" && (
               <div className="flex items-center gap-2 flex-wrap sm:justify-end">
                 {cpuForBalance?.perfTier && gpuForBalance?.perfTier && gpuForBalance.perfTier > 0 && (
-                  <span className="text-xs text-[#64748B] tabular-nums whitespace-nowrap">
-                    CPU T{cpuForBalance.perfTier} · GPU T{gpuForBalance.perfTier}
+                  <span className="text-xs text-[#64748B] whitespace-nowrap">
+                    CPU: {["","Entry","Budget","Mid-Range","High-End","Enthusiast"][cpuForBalance.perfTier]} · GPU: {["","Entry","Budget","Mid-Range","High-End","Enthusiast"][gpuForBalance.perfTier]}
                   </span>
                 )}
                 {balanceStatus === "balanced" && (
