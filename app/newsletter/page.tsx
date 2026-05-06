@@ -35,29 +35,16 @@ const tiers = [
     name: "Builder",
     price: "£5",
     period: "/mo",
-    accent: false,
+    accent: true,
     perks: [
       "Everything in Free",
       "Full Discord community access",
-      "Weekly deal alerts",
+      "Daily deal alerts",
       "Build reviews",
       "Group buys & discount codes",
+      "Priority help from the community",
     ],
     note: "Discord community",
-  },
-  {
-    name: "Pro",
-    price: "£12",
-    period: "/mo",
-    accent: true,
-    perks: [
-      "Everything in Builder",
-      "Priority help desk",
-      "Monthly 1:1 session",
-      "Exclusive pre-builds",
-      "Founding member badge",
-    ],
-    note: "Most popular",
   },
 ] as const;
 
@@ -144,7 +131,7 @@ export default function NewsletterPage() {
           </p>
         </div>
 
-        <div className="grid grid-cols-1 sm:grid-cols-3 gap-6 max-w-4xl mx-auto">
+        <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 max-w-2xl mx-auto">
           {tiers.map((tier) => (
             <div
               key={tier.name}

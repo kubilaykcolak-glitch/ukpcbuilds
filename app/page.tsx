@@ -2,28 +2,12 @@ import { CheckCircle2, Cpu, ShoppingCart, BarChart3 } from "lucide-react";
 import HeroBuilder from "@/components/HeroBuilder";
 import NewsletterForm from "@/components/NewsletterForm";
 
-// ─── Section 4 plans ─────────────────────────────────────────────────────────
-const plans = [
-  {
-    name:    "Builder",
-    price:   "£5",
-    period:  "/mo",
-    badge:   null,
-    perks:   ["Community help desk", "Weekly deal alerts", "Build reviews", "Group buys"],
-    cta:     "Join Builder",
-    href:    "#",
-    accent:  false,
-  },
-  {
-    name:    "Pro",
-    price:   "£12",
-    period:  "/mo",
-    badge:   "Most popular",
-    perks:   ["Everything in Builder", "Priority help", "Monthly 1:1 session", "Exclusive pre-builds"],
-    cta:     "Join Pro",
-    href:    "#",
-    accent:  true,
-  },
+// ─── Section 4 community perks ───────────────────────────────────────────────
+const communityPerks = [
+  "Expert help desk — answers usually within the hour",
+  "Daily deal alerts on GPUs, CPUs & storage",
+  "Build reviews before you spend a penny",
+  "Group buys & community discount codes",
 ] as const;
 
 // ─── How it works steps ───────────────────────────────────────────────────────
@@ -120,75 +104,76 @@ export default function HomePage() {
       </section>
 
       {/* ═══════════════════════════════════════════════════════════════════
-          SECTION 3 — DISCORD COMMUNITY PLANS
+          SECTION 3 — DISCORD COMMUNITY
       ════════════════════════════════════════════════════════════════════ */}
       <section className="bg-[#1E293B]/40 border-y border-[#1E293B]">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20">
-          <div className="text-center mb-12">
-            <h2 className="text-2xl sm:text-3xl font-bold text-white">
-              Join the community
-            </h2>
-            <p className="mt-2 text-[#94A3B8]">
-              Get expert help, deal alerts, and build reviews on Discord.
-            </p>
-          </div>
+          <div className="max-w-3xl mx-auto flex flex-col sm:flex-row items-center gap-10">
+            {/* Left — copy */}
+            <div className="flex-1 text-center sm:text-left">
+              <h2 className="text-2xl sm:text-3xl font-bold text-white mb-3">
+                Join the community
+              </h2>
+              <p className="text-[#94A3B8] mb-6">
+                Get expert help, daily deal alerts, and build reviews on Discord.
+                Everything included for one flat price.
+              </p>
+              <ul className="flex flex-col gap-3 mb-8">
+                {communityPerks.map((perk) => (
+                  <li key={perk} className="flex items-start gap-2.5 text-sm">
+                    <CheckCircle2 className="w-4 h-4 text-[#2563EB] mt-0.5 shrink-0" aria-hidden="true" />
+                    <span className="text-[#94A3B8]">{perk}</span>
+                  </li>
+                ))}
+              </ul>
+            </div>
 
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 max-w-3xl mx-auto">
-            {plans.map((plan) => (
-              <div
-                key={plan.name}
-                className={`relative flex flex-col rounded-2xl border p-8 ${
-                  plan.accent
-                    ? "bg-[#1E293B] border-[#2563EB] shadow-[0_0_32px_rgba(37,99,235,0.25)]"
-                    : "bg-[#1E293B] border-[#334155]"
-                }`}
-              >
-                {plan.badge && (
-                  <span className="absolute -top-3 left-1/2 -translate-x-1/2 bg-[#2563EB] text-white text-xs font-bold px-3 py-1 rounded-full">
-                    {plan.badge}
-                  </span>
-                )}
-
-                <div className="mb-6">
-                  <h3 className="text-xl font-bold text-white">{plan.name}</h3>
-                  <div className="flex items-baseline gap-1 mt-2">
-                    <span className="text-4xl font-extrabold text-white">
-                      {plan.price}
-                    </span>
-                    <span className="text-[#94A3B8] text-sm">{plan.period}</span>
-                  </div>
-                </div>
-
-                <ul className="flex flex-col gap-3 mb-8 flex-1">
-                  {plan.perks.map((perk) => (
-                    <li key={perk} className="flex items-start gap-2.5 text-sm">
-                      <CheckCircle2
-                        className="w-4 h-4 text-[#2563EB] mt-0.5 shrink-0"
-                        aria-hidden="true"
-                      />
-                      <span className="text-[#94A3B8]">{perk}</span>
-                    </li>
-                  ))}
-                </ul>
-
-                <a
-                  href={plan.href}
-                  className={`text-center font-semibold text-sm px-6 py-3 rounded-xl transition-colors ${
-                    plan.accent
-                      ? "bg-[#2563EB] hover:bg-blue-500 text-white"
-                      : "bg-[#0F172A] hover:bg-[#1E293B] border border-[#334155] text-white"
-                  }`}
-                >
-                  {plan.cta}
-                </a>
+            {/* Right — pricing card */}
+            <div className="w-full sm:w-64 shrink-0 bg-[#1E293B] border border-[#2563EB] rounded-2xl p-7 shadow-[0_0_32px_rgba(37,99,235,0.2)] text-center">
+              <p className="text-xs font-bold text-[#2563EB] uppercase tracking-widest mb-3">Builder</p>
+              <div className="flex items-baseline justify-center gap-1 mb-1">
+                <span className="text-4xl font-extrabold text-white">£5</span>
+                <span className="text-[#94A3B8] text-sm">/mo</span>
               </div>
-            ))}
+              <p className="text-xs text-[#64748B] mb-6">Cancel anytime</p>
+              <a
+                href="/discord"
+                className="block bg-[#2563EB] hover:bg-blue-500 transition-colors text-white font-bold text-sm px-6 py-3 rounded-xl"
+              >
+                Join now
+              </a>
+            </div>
           </div>
         </div>
       </section>
 
       {/* ═══════════════════════════════════════════════════════════════════
-          SECTION 4 — NEWSLETTER
+          SECTION 4 — BUY ME A COFFEE
+      ════════════════════════════════════════════════════════════════════ */}
+      <section>
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="max-w-xl mx-auto bg-[#1E293B] border border-[#334155] rounded-2xl px-8 py-8 flex flex-col sm:flex-row items-center gap-6 text-center sm:text-left">
+            <span className="text-5xl shrink-0" aria-hidden="true">☕</span>
+            <div className="flex-1">
+              <h3 className="text-lg font-bold text-white mb-1">Find this useful?</h3>
+              <p className="text-sm text-[#94A3B8]">
+                This site is free and always will be. If it saved you money or time on your build, a coffee goes a long way.
+              </p>
+            </div>
+            <a
+              href="https://buymeacoffee.com/ukpcbuilds"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="shrink-0 inline-flex items-center gap-2 bg-[#FFDD00] hover:bg-yellow-300 transition-colors text-[#1a1a1a] font-bold text-sm px-6 py-3 rounded-xl whitespace-nowrap"
+            >
+              ☕ Buy me a coffee
+            </a>
+          </div>
+        </div>
+      </section>
+
+      {/* ═══════════════════════════════════════════════════════════════════
+          SECTION 5 — NEWSLETTER
       ════════════════════════════════════════════════════════════════════ */}
       <section>
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20">

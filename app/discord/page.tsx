@@ -7,12 +7,10 @@ import {
   ClipboardList,
   ShoppingBag,
   Archive,
-  Star,
   CheckCircle2,
   ChevronDown,
   ChevronUp,
 } from "lucide-react";
-import clsx from "clsx";
 
 // ── Feature cards ─────────────────────────────────────────────────────────────
 
@@ -42,26 +40,19 @@ const features = [
     title: "Monthly builds archive",
     body: "Every recommended build going back two years — so you can track how prices and part recommendations have changed.",
   },
-  {
-    icon: Star,
-    title: "Priority 1:1 help",
-    body: "Pro tier only. Book a 30-minute screen share with a builder to plan your exact setup.",
-  },
 ] as const;
 
-// ── Comparison table ──────────────────────────────────────────────────────────
+// ── What's included list ──────────────────────────────────────────────────────
 
-const tableRows: { label: string; builder: boolean; pro: boolean }[] = [
-  { label: "Discord access",       builder: true,  pro: true  },
-  { label: "Help desk",            builder: true,  pro: true  },
-  { label: "Deal alerts",          builder: true,  pro: true  },
-  { label: "Build reviews",        builder: true,  pro: true  },
-  { label: "Group buys",           builder: true,  pro: true  },
-  { label: "Archive",              builder: true,  pro: true  },
-  { label: "Priority help",        builder: false, pro: true  },
-  { label: "Monthly 1:1 session",  builder: false, pro: true  },
-  { label: "Founding member badge",builder: false, pro: true  },
-];
+const perks = [
+  "Full Discord community access",
+  "Expert help desk",
+  "Daily deal alerts",
+  "Build reviews & feedback",
+  "Group buys & community discount codes",
+  "Monthly builds archive",
+  "Priority help from experienced builders",
+] as const;
 
 // ── FAQ accordion ─────────────────────────────────────────────────────────────
 
@@ -71,12 +62,12 @@ const faqs = [
     a: "Yes — cancel in Whop with one click. No emails, no hoops, no questions asked.",
   },
   {
-    q: "What is Founding Member pricing?",
-    a: "The first 50 members lock in £3/mo for life on the Builder tier. Once those spots are gone, the standard price applies.",
-  },
-  {
     q: "Is there a free trial?",
     a: "Your first month is risk-free. If you're not happy, email us and we'll refund it — no questions asked.",
+  },
+  {
+    q: "How active is the community?",
+    a: "Deal alerts are posted daily. The help desk typically gets a response within an hour during the day. Group buys are organised monthly.",
   },
 ] as const;
 
@@ -127,22 +118,14 @@ export default function DiscordPage() {
             <span className="text-[#2563EB]">Community</span>
           </h1>
           <p className="text-lg sm:text-xl text-[#94A3B8] max-w-xl text-balance">
-            Expert help. Automated deal alerts. Monthly group buys. From £5/month.
+            Expert help, daily deal alerts, build reviews, and group buys. Everything in one place for £5/month.
           </p>
-          <div className="flex flex-col sm:flex-row gap-4 mt-2">
-            <a
-              href="#"
-              className="inline-flex items-center justify-center gap-2 border border-[#334155] hover:border-[#2563EB] bg-[#1E293B] hover:bg-[#1E293B]/80 transition-colors text-white font-semibold px-8 py-3.5 rounded-xl"
-            >
-              Join as Builder — £5/mo
-            </a>
-            <a
-              href="#"
-              className="inline-flex items-center justify-center gap-2 bg-[#2563EB] hover:bg-blue-500 transition-colors text-white font-semibold px-8 py-3.5 rounded-xl shadow-[0_0_24px_rgba(37,99,235,0.35)]"
-            >
-              Join as Pro — £12/mo
-            </a>
-          </div>
+          <a
+            href="#"
+            className="inline-flex items-center justify-center gap-2 bg-[#2563EB] hover:bg-blue-500 transition-colors text-white font-semibold px-10 py-4 rounded-xl shadow-[0_0_24px_rgba(37,99,235,0.35)] text-lg mt-2"
+          >
+            Join the community — £5/mo
+          </a>
         </div>
       </section>
 
@@ -168,70 +151,37 @@ export default function DiscordPage() {
         </div>
       </section>
 
-      {/* ══ COMPARISON TABLE ══════════════════════════════════════════════════ */}
+      {/* ══ PRICING CARD ══════════════════════════════════════════════════════ */}
       <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full">
         <div className="text-center mb-12">
-          <h2 className="text-2xl sm:text-3xl font-bold text-white">Compare plans</h2>
-          <p className="mt-2 text-[#94A3B8]">Both tiers, side by side</p>
-        </div>
-        <div className="max-w-2xl mx-auto bg-[#1E293B] border border-[#334155] rounded-2xl overflow-hidden">
-          <table className="w-full text-sm">
-            <thead>
-              <tr className="border-b border-[#334155]">
-                <th className="text-left px-6 py-4 text-[#94A3B8] font-semibold w-1/2" />
-                <th className="text-center px-6 py-4 text-white font-bold">
-                  Builder<br />
-                  <span className="text-[#2563EB] text-lg font-extrabold">£5</span>
-                  <span className="text-[#94A3B8] text-xs font-normal">/mo</span>
-                </th>
-                <th className="text-center px-6 py-4 text-white font-bold">
-                  Pro<br />
-                  <span className="text-[#2563EB] text-lg font-extrabold">£12</span>
-                  <span className="text-[#94A3B8] text-xs font-normal">/mo</span>
-                </th>
-              </tr>
-            </thead>
-            <tbody>
-              {tableRows.map(({ label, builder, pro }, i) => (
-                <tr
-                  key={label}
-                  className={clsx(
-                    i < tableRows.length - 1 && "border-b border-[#0F172A]",
-                    "hover:bg-white/[0.02] transition-colors"
-                  )}
-                >
-                  <td className="px-6 py-3.5 text-[#94A3B8]">{label}</td>
-                  <td className="px-6 py-3.5 text-center">
-                    {builder
-                      ? <CheckCircle2 className="w-5 h-5 text-emerald-400 mx-auto" aria-label="Included" />
-                      : <span className="text-[#475569] font-bold" aria-label="Not included">—</span>
-                    }
-                  </td>
-                  <td className="px-6 py-3.5 text-center">
-                    {pro
-                      ? <CheckCircle2 className="w-5 h-5 text-emerald-400 mx-auto" aria-label="Included" />
-                      : <span className="text-[#475569] font-bold" aria-label="Not included">—</span>
-                    }
-                  </td>
-                </tr>
-              ))}
-            </tbody>
-          </table>
+          <h2 className="text-2xl sm:text-3xl font-bold text-white">Simple pricing</h2>
+          <p className="mt-2 text-[#94A3B8]">One plan. Everything included.</p>
         </div>
 
-        {/* CTA below table */}
-        <div className="flex flex-col sm:flex-row gap-4 justify-center mt-8">
+        <div className="max-w-md mx-auto bg-[#1E293B] border border-[#2563EB] rounded-2xl p-8 shadow-[0_0_40px_rgba(37,99,235,0.2)]">
+          <div className="mb-6">
+            <p className="text-sm font-semibold text-[#2563EB] uppercase tracking-widest mb-2">Builder</p>
+            <div className="flex items-baseline gap-1">
+              <span className="text-5xl font-extrabold text-white">£5</span>
+              <span className="text-[#94A3B8] text-lg">/month</span>
+            </div>
+            <p className="text-sm text-[#64748B] mt-2">Cancel anytime. First month risk-free.</p>
+          </div>
+
+          <ul className="flex flex-col gap-3 mb-8">
+            {perks.map((perk) => (
+              <li key={perk} className="flex items-start gap-3 text-sm">
+                <CheckCircle2 className="w-4 h-4 text-[#2563EB] mt-0.5 shrink-0" aria-hidden />
+                <span className="text-[#94A3B8]">{perk}</span>
+              </li>
+            ))}
+          </ul>
+
           <a
             href="#"
-            className="inline-flex items-center justify-center gap-2 border border-[#334155] hover:border-[#2563EB] bg-[#1E293B] transition-colors text-white font-semibold px-8 py-3.5 rounded-xl"
+            className="block text-center bg-[#2563EB] hover:bg-blue-500 transition-colors text-white font-bold text-base px-6 py-3.5 rounded-xl"
           >
-            Join Builder — £5/mo
-          </a>
-          <a
-            href="#"
-            className="inline-flex items-center justify-center gap-2 bg-[#2563EB] hover:bg-blue-500 transition-colors text-white font-semibold px-8 py-3.5 rounded-xl shadow-[0_0_24px_rgba(37,99,235,0.35)]"
-          >
-            Join Pro — £12/mo
+            Join now — £5/mo
           </a>
         </div>
       </section>
