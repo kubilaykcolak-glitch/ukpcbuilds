@@ -614,24 +614,13 @@ export default function BuilderClient() {
             <p className="text-sm text-[#94A3B8] mb-5">
               Join our Discord for build reviews, group buys, and real-time advice from the community.
             </p>
-            <div className="flex flex-col sm:flex-row gap-3">
-              <a
-                href="#"
-                className="flex items-center justify-center gap-2 border border-[#334155] hover:border-[#2563EB] bg-[#0F172A] hover:bg-[#0F172A]/80 transition-colors text-white font-semibold text-sm px-6 py-3 rounded-xl"
-              >
-                Builder
-                <span className="text-[#94A3B8] font-normal">£5/mo</span>
-                <ChevronRight className="w-4 h-4 text-[#2563EB]" aria-hidden />
-              </a>
-              <a
-                href="#"
-                className="flex items-center justify-center gap-2 bg-[#2563EB] hover:bg-blue-500 transition-colors text-white font-semibold text-sm px-6 py-3 rounded-xl"
-              >
-                Pro
-                <span className="text-blue-200 font-normal">£12/mo</span>
-                <ChevronRight className="w-4 h-4" aria-hidden />
-              </a>
-            </div>
+            <a
+              href="/discord"
+              className="inline-flex items-center justify-center gap-2 bg-[#2563EB] hover:bg-blue-500 transition-colors text-white font-semibold text-sm px-6 py-3 rounded-xl"
+            >
+              Join the community — £5/mo
+              <ChevronRight className="w-4 h-4" aria-hidden />
+            </a>
           </div>
 
         </div>
