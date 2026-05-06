@@ -122,15 +122,21 @@ export default function BuilderClient() {
   const [tier, setTier] = useState<TierKey>(() =>
     getTier(parseBudget(searchParams.get("budget")))
   );
-  const [email, setEmail]       = useState("");
+  const [email, setEmail]           = useState("");
   const [subscribed, setSubscribed] = useState(false);
   const [controlsOpen, setControlsOpen] = useState(true);
+  const [appliedDowngrades, setAppliedDowngrades] = useState<Set<string>>(new Set());
 
   const resultsRef = useRef<HTMLDivElement>(null);
 
   // ── Live build — recomputes whenever tier or useCase changes ────────────────
   const currentBuild: UseCaseData | null =
     BUILDS[tier]?.useCases?.[useCase] ?? null;
+
+  // Reset applied downgrades whenever the build changes
+  useEffect(() => {
+    setAppliedDowngrades(new Set());
+  }, [tier, useCase]);
 
   // ── Auto-scroll to results when arriving from the homepage ──────────────────
   useEffect(() => {
@@ -178,22 +184,46 @@ export default function BuilderClient() {
   const tierMeta  = TIER_META[tier];
   const ucMeta    = USE_CASES.find((u) => u.id === useCase)!;
 
-  // ── Downgrade hints ────────────────────────────────────────────────────────
-  const isOverBudget = currentBuild !== null && currentBuild.total > budget;
-  const overBy       = currentBuild ? currentBuild.total - budget : 0;
+  // ── Downgrade logic ────────────────────────────────────────────────────────
   const lowerTierKey = getLowerTier(tier);
   const lowerBuild   = lowerTierKey ? (BUILDS[lowerTierKey]?.useCases?.[useCase] ?? null) : null;
 
+  // Effective parts: swap in lower-tier alt for any applied downgrade
+  const effectiveParts: Part[] = currentBuild
+    ? currentBuild.parts.map((part) => {
+        if (appliedDowngrades.has(part.type) && lowerBuild) {
+          const alt = lowerBuild.parts.find((p) => p.type === part.type);
+          if (alt) return alt;
+        }
+        return part;
+      })
+    : [];
+  const effectiveTotal = effectiveParts.reduce((s, p) => s + p.price, 0);
+
+  const isOverBudget = currentBuild !== null && effectiveTotal > budget;
+  const overBy       = isOverBudget ? effectiveTotal - budget : 0;
+
   interface DowngradeOption { part: Part; alt: Part; saving: number }
+  // Only show options for parts not yet applied
   const downgradeOptions: DowngradeOption[] =
     isOverBudget && currentBuild && lowerBuild
       ? currentBuild.parts.flatMap((part) => {
+          if (appliedDowngrades.has(part.type)) return [];
           const alt = lowerBuild.parts.find((p) => p.type === part.type);
           if (!alt || alt.price >= part.price) return [];
           return [{ part, alt, saving: part.price - alt.price }];
         })
       : [];
-  const totalDowngradeSaving = downgradeOptions.reduce((s, o) => s + o.saving, 0);;
+  const totalDowngradeSaving = downgradeOptions.reduce((s, o) => s + o.saving, 0);
+
+  function applyDowngrade(partType: string) {
+    setAppliedDowngrades((prev) => new Set([...prev, partType]));
+  }
+  function applyAllDowngrades() {
+    setAppliedDowngrades((prev) =>
+      new Set([...prev, ...downgradeOptions.map((o) => o.part.type)])
+    );
+  }
 
   // ── Render ─────────────────────────────────────────────────────────────────
 
@@ -253,53 +283,66 @@ export default function BuilderClient() {
                   </tr>
                 </thead>
                 <tbody>
-                  {currentBuild.parts.map((part, i) => (
-                    <tr
-                      key={`${part.type}-${i}`}
-                      className="border-b border-[#0F172A] last:border-0 hover:bg-white/[0.02] transition-colors"
-                    >
-                      <td className="px-5 py-4 text-[#94A3B8] font-medium whitespace-nowrap align-top">
-                        {part.type}
-                      </td>
-                      <td className="px-5 py-4 align-top">
-                        <p className="text-white font-medium leading-snug">{part.name}</p>
-                        <p className="text-xs text-[#64748B] mt-1 leading-relaxed max-w-md">{part.why}</p>
-                      </td>
-                      <td className="px-5 py-4 text-right font-semibold tabular-nums align-top whitespace-nowrap">
-                        {part.price === 0
-                          ? <span className="text-[#94A3B8] text-xs font-normal">Included</span>
-                          : <span className="text-white">£{part.price}</span>
-                        }
-                      </td>
-                      <td className="px-5 py-4 text-right align-top">
-                        {part.affiliateUrl !== "#" ? (
-                          <a
-                            href={part.affiliateUrl}
-                            target="_blank"
-                            rel="noopener noreferrer"
-                            className="inline-flex items-center gap-1.5 bg-[#2563EB] hover:bg-blue-500 transition-colors text-white text-xs font-semibold px-3 py-1.5 rounded-lg whitespace-nowrap"
-                          >
-                            {part.retailer}
-                            <ExternalLink className="w-3 h-3" aria-hidden />
-                          </a>
-                        ) : (
-                          <span className="text-xs text-[#475569]">{part.retailer}</span>
-                        )}
-                      </td>
-                    </tr>
-                  ))}
+                  {effectiveParts.map((part, i) => {
+                    const isDowngraded = appliedDowngrades.has(part.type);
+                    return (
+                      <tr
+                        key={`${part.type}-${i}`}
+                        className="border-b border-[#0F172A] last:border-0 hover:bg-white/[0.02] transition-colors"
+                      >
+                        <td className="px-5 py-4 text-[#94A3B8] font-medium whitespace-nowrap align-top">
+                          {part.type}
+                        </td>
+                        <td className="px-5 py-4 align-top">
+                          <div className="flex items-center gap-2 flex-wrap">
+                            <p className="text-white font-medium leading-snug">{part.name}</p>
+                            {isDowngraded && (
+                              <span className="inline-flex items-center gap-1 text-xs font-semibold bg-emerald-500/10 text-emerald-400 border border-emerald-500/25 px-2 py-0.5 rounded-full whitespace-nowrap">
+                                ✓ Downgraded
+                              </span>
+                            )}
+                          </div>
+                          <p className="text-xs text-[#64748B] mt-1 leading-relaxed max-w-md">{part.why}</p>
+                        </td>
+                        <td className="px-5 py-4 text-right font-semibold tabular-nums align-top whitespace-nowrap">
+                          {part.price === 0
+                            ? <span className="text-[#94A3B8] text-xs font-normal">Included</span>
+                            : <span className={isDowngraded ? "text-emerald-400" : "text-white"}>£{part.price}</span>
+                          }
+                        </td>
+                        <td className="px-5 py-4 text-right align-top">
+                          {part.affiliateUrl !== "#" ? (
+                            <a
+                              href={part.affiliateUrl}
+                              target="_blank"
+                              rel="noopener noreferrer"
+                              className="inline-flex items-center gap-1.5 bg-[#2563EB] hover:bg-blue-500 transition-colors text-white text-xs font-semibold px-3 py-1.5 rounded-lg whitespace-nowrap"
+                            >
+                              {part.retailer}
+                              <ExternalLink className="w-3 h-3" aria-hidden />
+                            </a>
+                          ) : (
+                            <span className="text-xs text-[#475569]">{part.retailer}</span>
+                          )}
+                        </td>
+                      </tr>
+                    );
+                  })}
 
                   {/* Total row */}
                   <tr className="bg-[#0F172A]/60 border-t-2 border-[#334155]">
                     <td colSpan={2} className="px-5 py-5">
                       <p className="text-white font-bold text-base">Total build cost</p>
                       <p className="text-xs text-[#64748B] mt-0.5">
-                        All parts included · within your £{budget.toLocaleString("en-GB")} budget
+                        All parts included · {isOverBudget
+                          ? <span className="text-amber-400">£{overBy.toLocaleString("en-GB")} over your budget</span>
+                          : `within your £${budget.toLocaleString("en-GB")} budget`
+                        }
                       </p>
                     </td>
                     <td className="px-5 py-5 text-right">
                       <p className="text-[#2563EB] font-extrabold text-xl tabular-nums">
-                        £{currentBuild.total.toLocaleString("en-GB")}
+                        £{effectiveTotal.toLocaleString("en-GB")}
                       </p>
                     </td>
                     <td />
@@ -325,32 +368,40 @@ export default function BuilderClient() {
           {/* ── Downgrade options card ───────────────────────────────── */}
           {isOverBudget && downgradeOptions.length > 0 && (
             <div className="bg-[#1E293B] border border-amber-500/25 rounded-2xl overflow-hidden">
+
               {/* Card header */}
-              <div className="flex items-center gap-3 px-6 py-4 border-b border-[#334155]">
-                <AlertTriangle className="w-4 h-4 text-amber-400 shrink-0" aria-hidden />
-                <div>
-                  <h3 className="text-sm font-bold text-white">Downgrade options</h3>
-                  <p className="text-xs text-[#64748B] mt-0.5">
-                    Swap these parts to save up to{" "}
-                    <span className="text-amber-400 font-semibold">
-                      £{totalDowngradeSaving.toLocaleString("en-GB")}
-                    </span>{" "}
-                    with a small performance trade-off
-                  </p>
+              <div className="flex items-center justify-between gap-3 px-6 py-4 border-b border-[#334155]">
+                <div className="flex items-center gap-3">
+                  <AlertTriangle className="w-4 h-4 text-amber-400 shrink-0" aria-hidden />
+                  <div>
+                    <h3 className="text-sm font-bold text-white">Downgrade options</h3>
+                    <p className="text-xs text-[#64748B] mt-0.5">
+                      Apply swaps individually or all at once — the parts list and total update instantly
+                    </p>
+                  </div>
                 </div>
+                {downgradeOptions.length > 1 && (
+                  <button
+                    onClick={applyAllDowngrades}
+                    className="shrink-0 inline-flex items-center gap-1.5 bg-amber-500/15 hover:bg-amber-500/25 border border-amber-500/30 text-amber-400 text-xs font-bold px-4 py-2 rounded-lg transition-colors whitespace-nowrap"
+                  >
+                    Apply all · save £{totalDowngradeSaving.toLocaleString("en-GB")}
+                  </button>
+                )}
               </div>
 
               {/* Swap rows */}
               <div className="divide-y divide-[#0F172A]">
                 {downgradeOptions.map(({ part, alt, saving }) => (
-                  <div key={part.type} className="px-6 py-4 flex flex-col sm:flex-row sm:items-center gap-3">
+                  <div key={part.type} className="px-6 py-4 flex flex-col sm:flex-row sm:items-center gap-4">
+
                     {/* Component label */}
-                    <span className="text-xs font-semibold text-[#64748B] uppercase tracking-wide w-24 shrink-0">
+                    <span className="text-xs font-semibold text-[#64748B] uppercase tracking-wide w-20 shrink-0">
                       {part.type}
                     </span>
 
                     {/* From → To */}
-                    <div className="flex-1 flex flex-col sm:flex-row sm:items-center gap-2">
+                    <div className="flex-1 flex flex-col sm:flex-row sm:items-stretch gap-2">
                       {/* Current (from) */}
                       <div className="flex-1 bg-[#0F172A] rounded-xl px-4 py-3">
                         <p className="text-xs text-[#64748B] mb-1">Current</p>
@@ -359,7 +410,7 @@ export default function BuilderClient() {
                       </div>
 
                       {/* Arrow */}
-                      <div className="text-amber-400 font-bold text-lg sm:mx-2 text-center">→</div>
+                      <div className="text-amber-400 font-bold text-lg sm:mx-1 flex items-center justify-center">→</div>
 
                       {/* Alternative (to) */}
                       <div className="flex-1 bg-amber-500/5 border border-amber-500/20 rounded-xl px-4 py-3">
@@ -369,22 +420,20 @@ export default function BuilderClient() {
                       </div>
                     </div>
 
-                    {/* Saving badge */}
-                    <div className="sm:text-right shrink-0">
-                      <span className="inline-flex items-center gap-1 text-xs font-bold bg-amber-500/10 text-amber-400 border border-amber-500/25 px-3 py-1.5 rounded-full">
+                    {/* Save + Apply */}
+                    <div className="flex sm:flex-col items-center sm:items-end gap-2 shrink-0">
+                      <span className="text-xs font-bold text-amber-400 whitespace-nowrap">
                         Save £{saving.toLocaleString("en-GB")}
                       </span>
+                      <button
+                        onClick={() => applyDowngrade(part.type)}
+                        className="inline-flex items-center gap-1 bg-amber-500/15 hover:bg-amber-500/25 border border-amber-500/30 text-amber-400 text-xs font-bold px-3 py-1.5 rounded-lg transition-colors whitespace-nowrap"
+                      >
+                        Apply swap
+                      </button>
                     </div>
                   </div>
                 ))}
-              </div>
-
-              {/* Total saving footer */}
-              <div className="flex items-center justify-between px-6 py-4 border-t border-[#334155] bg-[#0F172A]/40">
-                <p className="text-sm text-[#94A3B8]">Total saving if all swaps applied</p>
-                <p className="text-base font-extrabold text-amber-400">
-                  £{totalDowngradeSaving.toLocaleString("en-GB")}
-                </p>
               </div>
             </div>
           )}
