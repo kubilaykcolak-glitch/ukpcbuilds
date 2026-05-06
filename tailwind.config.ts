@@ -9,11 +9,17 @@ const config: Config = {
   theme: {
     extend: {
       colors: {
-        background: "var(--background)",
-        foreground: "var(--foreground)",
+        bg:      "#0F172A",
+        accent:  "#2563EB",
+        surface: "#1E293B",
+        muted:   "#94A3B8",
+      },
+      fontFamily: {
+        sans: ["var(--font-inter)", "system-ui", "sans-serif"],
       },
     },
   },
   plugins: [],
 };
+
 export default config;
