@@ -5,7 +5,7 @@ import { useSearchParams } from "next/navigation";
 import {
   Gamepad2, Briefcase, Video, Zap,
   CheckCircle2, AlertTriangle, ExternalLink,
-  ChevronRight, Send, SlidersHorizontal,
+  ChevronRight, Send,
 } from "lucide-react";
 import clsx from "clsx";
 import buildsData from "@/data/builds.json";
@@ -124,7 +124,6 @@ export default function BuilderClient() {
   );
   const [email, setEmail]           = useState("");
   const [subscribed, setSubscribed] = useState(false);
-  const [controlsOpen, setControlsOpen] = useState(true);
   const [appliedDowngrades, setAppliedDowngrades] = useState<Set<string>>(new Set());
 
   const resultsRef = useRef<HTMLDivElement>(null);
@@ -236,25 +235,112 @@ export default function BuilderClient() {
       {currentBuild && (
         <div ref={resultsRef} className="flex flex-col gap-6 scroll-mt-20">
 
-          {/* Build header */}
-          <div className="flex flex-col gap-3">
-            <div className="flex items-center gap-2 flex-wrap">
-              <span className={clsx("text-xs font-semibold px-2.5 py-1 rounded-full", tierMeta.pill)}>
-                {tierMeta.label} Build
-              </span>
-              <span className="text-[#94A3B8] text-sm">·</span>
-              <span className="text-[#94A3B8] text-sm">{ucMeta.label}</span>
+          {/* ── Combined header + controls card ─────────────────────── */}
+          <div className="bg-[#1E293B] border border-[#334155] rounded-2xl p-6 sm:p-8 flex flex-col gap-7">
+
+            {/* Heading */}
+            <div className="flex flex-col gap-2">
+              <div className="flex items-center gap-2 flex-wrap">
+                <span className={clsx("text-xs font-semibold px-2.5 py-1 rounded-full", tierMeta.pill)}>
+                  {tierMeta.label} Build
+                </span>
+                <span className="text-[#94A3B8] text-sm">·</span>
+                <span className="text-[#94A3B8] text-sm">{ucMeta.label}</span>
+              </div>
+              <h1 className="text-2xl sm:text-3xl font-extrabold text-white">
+                Best build for your{" "}
+                <span className="text-[#2563EB]">£{budget.toLocaleString("en-GB")}</span>{" "}
+                budget
+              </h1>
+              <p className="text-sm text-[#64748B] leading-relaxed">
+                Here&apos;s the best combination of parts at this price point — adjust below to update the list instantly.
+              </p>
             </div>
-            <h1 className="text-2xl sm:text-3xl font-extrabold text-white">
-              Best build for your{" "}
-              <span className="text-[#2563EB]">£{budget.toLocaleString("en-GB")}</span>{" "}
-              budget
-            </h1>
-            <p className="text-sm text-[#64748B] leading-relaxed max-w-xl">
-              Here&apos;s the best combination of parts we can put together at this price point.
-              Every component has been chosen for value and compatibility — the total build
-              cost is shown at the bottom of the list.
-            </p>
+
+            <div className="border-t border-[#334155]" />
+
+            {/* Budget slider */}
+            <div>
+              <div className="flex items-center justify-between gap-4 mb-5">
+                <span className="text-base font-semibold text-white">Your budget</span>
+                <div className="flex items-center gap-1">
+                  <span className="text-[#2563EB] font-extrabold text-2xl">£</span>
+                  <input
+                    type="number"
+                    min={MIN}
+                    max={MAX}
+                    step={50}
+                    value={budgetStr}
+                    onChange={onNumberChange}
+                    onBlur={onNumberBlur}
+                    aria-label="Budget in pounds"
+                    className="w-28 bg-[#0F172A] border border-[#334155] focus:border-[#2563EB] text-white font-extrabold text-2xl text-right rounded-xl px-3 py-2 focus:outline-none transition-colors tabular-nums"
+                  />
+                </div>
+              </div>
+              <input
+                type="range"
+                min={MIN}
+                max={MAX}
+                step={50}
+                value={budget}
+                onChange={onRangeChange}
+                aria-label="Budget slider"
+                className="hero-slider w-full h-3 rounded-full appearance-none cursor-pointer mb-4"
+                style={{
+                  background: `linear-gradient(to right, #2563EB ${sliderPct}%, #0F172A ${sliderPct}%)`,
+                }}
+              />
+              <div className="flex justify-between text-xs text-[#64748B] mb-3">
+                <span>£300</span>
+                <span>£1,000</span>
+                <span>£2,000</span>
+                <span>£3,000</span>
+              </div>
+              <div className="flex items-center gap-2">
+                <span className="text-sm text-[#64748B]">Tier:</span>
+                <span className={clsx("text-xs font-semibold px-3 py-1 rounded-full", tierMeta.pill)}>
+                  {tierMeta.label}
+                </span>
+              </div>
+            </div>
+
+            {/* Use-case selector */}
+            <div>
+              <p className="text-base font-semibold text-white mb-4">Use case</p>
+              <div className="grid grid-cols-2 gap-3">
+                {USE_CASES.map(({ id, label, desc, Icon }) => {
+                  const active = useCase === id;
+                  return (
+                    <button
+                      key={id}
+                      onClick={() => setUseCase(id)}
+                      aria-pressed={active}
+                      className={clsx(
+                        "flex items-center gap-4 p-4 rounded-xl border-2 text-left transition-all duration-150",
+                        active
+                          ? "border-blue-500 bg-blue-500/10"
+                          : "border-[#334155] bg-[#0F172A]/40 hover:border-[#475569]"
+                      )}
+                    >
+                      <div className={clsx(
+                        "flex items-center justify-center w-11 h-11 rounded-xl shrink-0",
+                        active ? "bg-blue-500/20" : "bg-[#0F172A]"
+                      )}>
+                        <Icon className={clsx("w-5 h-5", active ? "text-blue-400" : "text-[#94A3B8]")} aria-hidden />
+                      </div>
+                      <div>
+                        <p className={clsx("font-semibold text-sm", active ? "text-white" : "text-[#CBD5E1]")}>
+                          {label}
+                        </p>
+                        <p className="text-xs text-[#64748B] mt-0.5 leading-snug">{desc}</p>
+                      </div>
+                    </button>
+                  );
+                })}
+              </div>
+            </div>
+
           </div>
 
           {/* ── Over-budget banner ──────────────────────────────────── */}
@@ -481,109 +567,6 @@ export default function BuilderClient() {
                 {currentBuild.performance.upgradeNote}
               </p>
             </div>
-          </div>
-
-          {/* ── Tweak your build ─────────────────────────────────────── */}
-          <div className="bg-[#1E293B] border border-[#334155] rounded-2xl overflow-hidden">
-            <button
-              onClick={() => setControlsOpen((o) => !o)}
-              className="w-full flex items-center justify-between gap-3 px-6 py-5 text-left hover:bg-white/[0.03] transition-colors"
-            >
-              <div className="flex items-center gap-3">
-                <SlidersHorizontal className="w-4 h-4 text-[#2563EB]" aria-hidden />
-                <span className="font-semibold text-white">Adjust your build</span>
-              </div>
-              <span className="text-[#94A3B8] text-sm">{controlsOpen ? "▲" : "▼"}</span>
-            </button>
-
-            {controlsOpen && (
-              <div className="border-t border-[#1E293B] px-6 pb-8 pt-6 flex flex-col gap-8">
-
-                {/* Budget slider */}
-                <div>
-                  <div className="flex items-center justify-between gap-4 mb-5">
-                    <span className="text-base font-semibold text-white">Your budget</span>
-                    <div className="flex items-center gap-1">
-                      <span className="text-[#2563EB] font-extrabold text-2xl">£</span>
-                      <input
-                        type="number"
-                        min={MIN}
-                        max={MAX}
-                        step={50}
-                        value={budgetStr}
-                        onChange={onNumberChange}
-                        onBlur={onNumberBlur}
-                        aria-label="Budget in pounds"
-                        className="w-28 bg-[#0F172A] border border-[#334155] focus:border-[#2563EB] text-white font-extrabold text-2xl text-right rounded-xl px-3 py-2 focus:outline-none transition-colors tabular-nums"
-                      />
-                    </div>
-                  </div>
-
-                  <input
-                    type="range"
-                    min={MIN}
-                    max={MAX}
-                    step={50}
-                    value={budget}
-                    onChange={onRangeChange}
-                    aria-label="Budget slider"
-                    className="hero-slider w-full h-3 rounded-full appearance-none cursor-pointer mb-4"
-                    style={{
-                      background: `linear-gradient(to right, #2563EB ${sliderPct}%, #1E293B ${sliderPct}%)`,
-                    }}
-                  />
-                  <div className="flex justify-between text-xs text-[#64748B] mb-3">
-                    <span>£300</span>
-                    <span>£1,000</span>
-                    <span>£2,000</span>
-                    <span>£3,000</span>
-                  </div>
-
-                  <div className="flex items-center gap-2">
-                    <span className="text-sm text-[#64748B]">Tier:</span>
-                    <span className={clsx("text-xs font-semibold px-3 py-1 rounded-full", tierMeta.pill)}>
-                      {tierMeta.label}
-                    </span>
-                  </div>
-                </div>
-
-                {/* Use-case selector */}
-                <div>
-                  <p className="text-base font-semibold text-white mb-4">Use case</p>
-                  <div className="grid grid-cols-2 gap-3">
-                    {USE_CASES.map(({ id, label, desc, Icon }) => {
-                      const active = useCase === id;
-                      return (
-                        <button
-                          key={id}
-                          onClick={() => setUseCase(id)}
-                          aria-pressed={active}
-                          className={clsx(
-                            "flex items-center gap-4 p-4 rounded-xl border-2 text-left transition-all duration-150",
-                            active
-                              ? "border-blue-500 bg-blue-500/10"
-                              : "border-[#334155] bg-[#0F172A]/40 hover:border-[#475569]"
-                          )}
-                        >
-                          <div className={clsx(
-                            "flex items-center justify-center w-11 h-11 rounded-xl shrink-0",
-                            active ? "bg-blue-500/20" : "bg-[#1E293B]"
-                          )}>
-                            <Icon className={clsx("w-5 h-5", active ? "text-blue-400" : "text-[#94A3B8]")} aria-hidden />
-                          </div>
-                          <div>
-                            <p className={clsx("font-semibold text-sm", active ? "text-white" : "text-[#CBD5E1]")}>
-                              {label}
-                            </p>
-                            <p className="text-xs text-[#64748B] mt-0.5 leading-snug">{desc}</p>
-                          </div>
-                        </button>
-                      );
-                    })}
-                  </div>
-                </div>
-              </div>
-            )}
           </div>
 
           {/* ── Newsletter capture ────────────────────────────────────── */}
