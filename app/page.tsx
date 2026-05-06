@@ -1,15 +1,6 @@
-import Link from "next/link";
 import { CheckCircle2, Cpu, ShoppingCart, BarChart3 } from "lucide-react";
 import HeroBuilder from "@/components/HeroBuilder";
 import NewsletterForm from "@/components/NewsletterForm";
-
-// ─── Section 3 static data ────────────────────────────────────────────────────
-const exampleParts = [
-  { type: "CPU",     name: "AMD Ryzen 5 7600",     price: 150 },
-  { type: "GPU",     name: "AMD Radeon RX 7600 XT", price: 200 },
-  { type: "RAM",     name: "32 GB DDR5-5600",       price: 75  },
-  { type: "Storage", name: "1 TB NVMe PCIe 4.0",    price: 45  },
-];
 
 // ─── Section 4 plans ─────────────────────────────────────────────────────────
 const plans = [
@@ -129,85 +120,7 @@ export default function HomePage() {
       </section>
 
       {/* ═══════════════════════════════════════════════════════════════════
-          SECTION 3 — EXAMPLE PREVIEW
-      ════════════════════════════════════════════════════════════════════ */}
-      <section>
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20">
-          <div className="max-w-2xl mx-auto">
-            <div className="text-center mb-8">
-              <h2 className="text-2xl sm:text-3xl font-bold text-white">
-                For example, a{" "}
-                <span className="text-[#2563EB]">£700 gaming build</span> gets you…
-              </h2>
-            </div>
-
-            {/* Parts table */}
-            <div className="bg-[#1E293B] border border-[#334155] rounded-2xl overflow-hidden mb-6">
-              <table className="w-full text-sm">
-                <thead>
-                  <tr className="border-b border-[#334155]">
-                    <th className="text-left px-5 py-3 text-xs font-semibold text-[#94A3B8] uppercase tracking-wider">
-                      Component
-                    </th>
-                    <th className="text-left px-5 py-3 text-xs font-semibold text-[#94A3B8] uppercase tracking-wider">
-                      Part
-                    </th>
-                    <th className="text-right px-5 py-3 text-xs font-semibold text-[#94A3B8] uppercase tracking-wider">
-                      Price
-                    </th>
-                  </tr>
-                </thead>
-                <tbody>
-                  {exampleParts.map((part, i) => (
-                    <tr
-                      key={part.type}
-                      className={i < exampleParts.length - 1 ? "border-b border-[#0F172A]" : ""}
-                    >
-                      <td className="px-5 py-4 text-[#94A3B8] font-medium whitespace-nowrap">
-                        {part.type}
-                      </td>
-                      <td className="px-5 py-4 text-white">{part.name}</td>
-                      <td className="px-5 py-4 text-right text-white font-semibold tabular-nums">
-                        £{part.price}
-                      </td>
-                    </tr>
-                  ))}
-                  <tr className="bg-[#0F172A]/50 border-t border-[#334155]">
-                    <td colSpan={2} className="px-5 py-3 text-sm font-bold text-white">
-                      Total
-                    </td>
-                    <td className="px-5 py-3 text-right font-bold text-[#2563EB] tabular-nums">
-                      £{exampleParts.reduce((s, p) => s + p.price, 0)}
-                    </td>
-                  </tr>
-                </tbody>
-              </table>
-            </div>
-
-            {/* Performance callout */}
-            <div className="bg-[#1E293B] border border-[#334155] rounded-xl px-5 py-4 mb-6 text-sm">
-              <p className="text-white font-medium mb-1">
-                ✅ Runs Valorant at 144 fps. Plays Fortnite at High 1080p.
-              </p>
-              <p className="text-[#94A3B8]">
-                ⚠️ Struggles with Cyberpunk 2077 at Ultra settings.
-              </p>
-            </div>
-
-            <div className="text-center">
-              <Link
-                href="/builder?budget=700&use=gaming"
-                className="inline-flex items-center gap-2 bg-[#2563EB] hover:bg-blue-500 transition-colors text-white font-semibold px-8 py-3.5 rounded-xl"
-              >
-                See your personalised build →
-              </Link>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* ═══════════════════════════════════════════════════════════════════
-          SECTION 4 — DISCORD COMMUNITY PLANS
+          SECTION 3 — DISCORD COMMUNITY PLANS
       ════════════════════════════════════════════════════════════════════ */}
       <section className="bg-[#1E293B]/40 border-y border-[#1E293B]">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20">
@@ -275,7 +188,7 @@ export default function HomePage() {
       </section>
 
       {/* ═══════════════════════════════════════════════════════════════════
-          SECTION 5 — NEWSLETTER
+          SECTION 4 — NEWSLETTER
       ════════════════════════════════════════════════════════════════════ */}
       <section>
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20">
