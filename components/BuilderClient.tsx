@@ -5,7 +5,7 @@ import { useSearchParams } from "next/navigation";
 import {
   Gamepad2, Briefcase, Video, Zap,
   CheckCircle2, AlertTriangle, ExternalLink,
-  ChevronRight, Send,
+  ChevronRight, Send, SlidersHorizontal,
 } from "lucide-react";
 import clsx from "clsx";
 import buildsData from "@/data/builds.json";
@@ -71,10 +71,10 @@ const USE_CASES: {
 // ── Helpers ───────────────────────────────────────────────────────────────────
 
 function getTier(budget: number): TierKey {
-  if (budget <= 450)  return "entry";
-  if (budget <= 700)  return "budget";
-  if (budget <= 1100) return "mid";
-  if (budget <= 1800) return "high";
+  if (budget <= 670)  return "entry";
+  if (budget <= 1100) return "budget";
+  if (budget <= 1600) return "mid";
+  if (budget <= 2800) return "high";
   return "enthusiast";
 }
 
@@ -86,38 +86,58 @@ function snapTo50(v: number) {
   return Math.round(v / 50) * 50;
 }
 
+function parseBudget(raw: string | null): number {
+  if (!raw) return 700;
+  const v = snapTo50(clamp(Number(raw)));
+  return isNaN(v) ? 700 : v;
+}
+
+function parseUseCase(raw: string | null): UseCaseKey {
+  if (raw && ["gaming", "office", "creation", "performance"].includes(raw)) {
+    return raw as UseCaseKey;
+  }
+  return "gaming";
+}
+
 // ── Component ─────────────────────────────────────────────────────────────────
 
 export default function BuilderClient() {
   const searchParams = useSearchParams();
 
-  const [budget,     setBudget]     = useState(700);
-  const [budgetStr,  setBudgetStr]  = useState("700");
-  const [useCase,    setUseCase]    = useState<UseCaseKey>("gaming");
-  const [results,    setResults]    = useState<UseCaseData | null>(null);
-  const [tier,       setTier]       = useState<TierKey>("budget");
-  const [email,      setEmail]      = useState("");
+  // ── Initialise state directly from URL params — no flash, no delay ──────────
+  const [budget, setBudget] = useState(() => parseBudget(searchParams.get("budget")));
+  const [budgetStr, setBudgetStr] = useState(() =>
+    String(parseBudget(searchParams.get("budget")))
+  );
+  const [useCase, setUseCase] = useState<UseCaseKey>(() =>
+    parseUseCase(searchParams.get("use"))
+  );
+  const [tier, setTier] = useState<TierKey>(() =>
+    getTier(parseBudget(searchParams.get("budget")))
+  );
+  const [email, setEmail]       = useState("");
   const [subscribed, setSubscribed] = useState(false);
+  const [controlsOpen, setControlsOpen] = useState(
+    // if arriving from homepage with params, start controls collapsed
+    () => !(searchParams.get("budget") || searchParams.get("use"))
+  );
 
   const resultsRef = useRef<HTMLDivElement>(null);
 
-  // Hydrate from URL params (?budget=700&use=gaming)
-  useEffect(() => {
-    const rawB = searchParams.get("budget");
-    const rawU = searchParams.get("use");
+  // ── Live build — recomputes whenever tier or useCase changes ────────────────
+  const currentBuild: UseCaseData | null =
+    BUILDS[tier]?.useCases?.[useCase] ?? null;
 
-    if (rawB) {
-      const v = snapTo50(clamp(Number(rawB)));
-      if (!isNaN(v)) {
-        setBudget(v);
-        setBudgetStr(String(v));
-        setTier(getTier(v));
-      }
+  // ── Auto-scroll to results when arriving from the homepage ──────────────────
+  useEffect(() => {
+    const hasParams = searchParams.get("budget") || searchParams.get("use");
+    if (hasParams) {
+      setTimeout(() => {
+        resultsRef.current?.scrollIntoView({ behavior: "smooth", block: "start" });
+      }, 250);
     }
-    if (rawU && ["gaming", "office", "creation", "performance"].includes(rawU)) {
-      setUseCase(rawU as UseCaseKey);
-    }
-  }, [searchParams]);
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   // ── Handlers ───────────────────────────────────────────────────────────────
 
@@ -145,15 +165,6 @@ export default function BuilderClient() {
     setTier(getTier(v));
   }
 
-  function onFindBuild() {
-    const data = BUILDS[tier]?.useCases?.[useCase];
-    if (!data) return;
-    setResults(data);
-    setTimeout(() => {
-      resultsRef.current?.scrollIntoView({ behavior: "smooth", block: "start" });
-    }, 60);
-  }
-
   function onSubscribe(e: React.FormEvent) {
     e.preventDefault();
     if (email.includes("@")) setSubscribed(true);
@@ -166,150 +177,34 @@ export default function BuilderClient() {
   // ── Render ─────────────────────────────────────────────────────────────────
 
   return (
-    <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-12 flex flex-col gap-10">
+    <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-12 flex flex-col gap-8">
 
-      {/* Page title */}
-      <div>
-        <h1 className="text-3xl sm:text-4xl font-extrabold text-white">
-          Build My PC
-        </h1>
-        <p className="mt-2 text-[#94A3B8]">
-          Set your budget, pick your use case, and get an instant UK parts list.
-        </p>
-      </div>
-
-      {/* ══════════════════════════════════════════════════
-          INPUTS
-      ══════════════════════════════════════════════════ */}
-      <div className="flex flex-col gap-6">
-
-        {/* 1 — Budget control */}
-        <div className="bg-[#1E293B] border border-[#334155] rounded-2xl p-6 sm:p-8">
-          <h2 className="text-base font-semibold text-[#94A3B8] uppercase tracking-wider mb-5">
-            1. Set your budget
-          </h2>
-
-          {/* Label + editable number */}
-          <div className="flex items-center justify-between gap-4 mb-4">
-            <span className="text-[#94A3B8] text-sm">Your budget:</span>
-            <div className="flex items-center gap-1.5">
-              <span className="text-white font-bold text-2xl">£</span>
-              <input
-                type="number"
-                min={MIN}
-                max={MAX}
-                step={50}
-                value={budgetStr}
-                onChange={onNumberChange}
-                onBlur={onNumberBlur}
-                aria-label="Budget in pounds"
-                className="w-28 bg-[#0F172A] border border-[#334155] focus:border-[#2563EB] text-white font-bold text-2xl text-right rounded-xl px-3 py-1.5 focus:outline-none transition-colors tabular-nums"
-              />
-            </div>
-          </div>
-
-          {/* Slider */}
-          <input
-            type="range"
-            min={MIN}
-            max={MAX}
-            step={50}
-            value={budget}
-            onChange={onRangeChange}
-            aria-label="Budget slider"
-            className="hero-slider w-full h-2 rounded-full appearance-none cursor-pointer mb-3"
-            style={{
-              background: `linear-gradient(to right, #2563EB ${sliderPct}%, #1E293B ${sliderPct}%)`,
-            }}
-          />
-          <div className="flex justify-between text-xs text-[#94A3B8] mb-5">
-            <span>£300</span>
-            <span>£1,000</span>
-            <span>£2,000</span>
-            <span>£3,000</span>
-          </div>
-
-          {/* Tier badge */}
-          <div className="flex items-center gap-2">
-            <span className="text-xs text-[#64748B]">Build tier:</span>
-            <span className={clsx("text-xs font-semibold px-2.5 py-1 rounded-full", tierMeta.pill)}>
-              {tierMeta.label}
-            </span>
-          </div>
-        </div>
-
-        {/* 2 — Use case selector */}
-        <div className="bg-[#1E293B] border border-[#334155] rounded-2xl p-6 sm:p-8">
-          <h2 className="text-base font-semibold text-[#94A3B8] uppercase tracking-wider mb-5">
-            2. Choose your use case
-          </h2>
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
-            {USE_CASES.map(({ id, label, desc, Icon }) => {
-              const active = useCase === id;
-              return (
-                <button
-                  key={id}
-                  onClick={() => setUseCase(id)}
-                  aria-pressed={active}
-                  className={clsx(
-                    "flex items-start gap-4 p-4 rounded-xl border-2 text-left transition-all duration-150",
-                    active
-                      ? "border-blue-500 bg-blue-500/10 shadow-[0_0_16px_rgba(59,130,246,0.15)]"
-                      : "border-[#334155] bg-[#0F172A]/40 hover:border-[#475569] hover:bg-[#0F172A]/70"
-                  )}
-                >
-                  <div className={clsx(
-                    "flex items-center justify-center w-11 h-11 rounded-xl shrink-0",
-                    active ? "bg-blue-500/20" : "bg-[#1E293B]"
-                  )}>
-                    <Icon className={clsx("w-5 h-5", active ? "text-blue-400" : "text-[#94A3B8]")} aria-hidden />
-                  </div>
-                  <div className="mt-0.5">
-                    <p className={clsx("font-semibold text-sm", active ? "text-white" : "text-[#CBD5E1]")}>
-                      {label}
-                    </p>
-                    <p className="text-xs text-[#64748B] mt-0.5">{desc}</p>
-                  </div>
-                </button>
-              );
-            })}
-          </div>
-        </div>
-
-        {/* CTA */}
-        <button
-          onClick={onFindBuild}
-          className="w-full bg-[#2563EB] hover:bg-blue-500 active:scale-[0.99] transition-all text-white font-bold text-lg py-4 rounded-xl shadow-[0_0_24px_rgba(37,99,235,0.35)] hover:shadow-[0_0_36px_rgba(37,99,235,0.5)]"
-        >
-          Find my build →
-        </button>
-      </div>
-
-      {/* ══════════════════════════════════════════════════
-          RESULTS
-      ══════════════════════════════════════════════════ */}
-      {results && (
-        <div ref={resultsRef} className="flex flex-col gap-6 scroll-mt-24">
-
-          {/* Divider */}
-          <div className="border-t border-[#1E293B] pt-4" />
+      {/* ══════════════════════════════════════════════════════
+          RESULTS (always visible — updates live)
+      ══════════════════════════════════════════════════════ */}
+      {currentBuild && (
+        <div ref={resultsRef} className="flex flex-col gap-6 scroll-mt-20">
 
           {/* Build header */}
-          <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3">
-            <div className="flex items-center gap-2 flex-wrap">
-              <span className={clsx("text-xs font-semibold px-2.5 py-1 rounded-full", tierMeta.pill)}>
-                {tierMeta.label} Build
-              </span>
-              <span className="text-[#94A3B8] text-sm">·</span>
-              <span className="text-[#94A3B8] text-sm">{ucMeta.label}</span>
+          <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+            <div>
+              <div className="flex items-center gap-2 flex-wrap mb-1">
+                <span className={clsx("text-xs font-semibold px-2.5 py-1 rounded-full", tierMeta.pill)}>
+                  {tierMeta.label} Build
+                </span>
+                <span className="text-[#94A3B8] text-sm">·</span>
+                <span className="text-[#94A3B8] text-sm">{ucMeta.label}</span>
+              </div>
+              <h1 className="text-2xl sm:text-3xl font-extrabold text-white">
+                Your recommended build
+              </h1>
             </div>
-            <p className="text-2xl font-extrabold text-white">
-              Total:{" "}
-              <span className="text-[#2563EB]">£{results.total.toLocaleString("en-GB")}</span>
+            <p className="text-3xl font-extrabold text-white shrink-0">
+              <span className="text-[#2563EB]">£{currentBuild.total.toLocaleString("en-GB")}</span>
             </p>
           </div>
 
-          {/* ── Parts table ──────────────────────────────────────────── */}
+          {/* ── Parts table ─────────────────────────────────────────── */}
           <div className="bg-[#1E293B] border border-[#334155] rounded-2xl overflow-hidden">
             <div className="overflow-x-auto">
               <table className="w-full text-sm min-w-[560px]">
@@ -322,7 +217,7 @@ export default function BuilderClient() {
                   </tr>
                 </thead>
                 <tbody>
-                  {results.parts.map((part, i) => (
+                  {currentBuild.parts.map((part, i) => (
                     <tr
                       key={`${part.type}-${i}`}
                       className="border-b border-[#0F172A] last:border-0 hover:bg-white/[0.02] transition-colors"
@@ -341,7 +236,7 @@ export default function BuilderClient() {
                         }
                       </td>
                       <td className="px-5 py-4 text-right align-top">
-                        {part.affiliateUrl !== "#" || part.price > 0 ? (
+                        {part.affiliateUrl !== "#" ? (
                           <a
                             href={part.affiliateUrl}
                             target="_blank"
@@ -352,7 +247,7 @@ export default function BuilderClient() {
                             <ExternalLink className="w-3 h-3" aria-hidden />
                           </a>
                         ) : (
-                          <span className="text-xs text-[#64748B]">—</span>
+                          <span className="text-xs text-[#475569]">{part.retailer}</span>
                         )}
                       </td>
                     </tr>
@@ -364,7 +259,7 @@ export default function BuilderClient() {
                       Total
                     </td>
                     <td className="px-5 py-4 text-right text-[#2563EB] font-extrabold text-base tabular-nums">
-                      £{results.total.toLocaleString("en-GB")}
+                      £{currentBuild.total.toLocaleString("en-GB")}
                     </td>
                     <td />
                   </tr>
@@ -386,26 +281,22 @@ export default function BuilderClient() {
             </div>
           </div>
 
-          {/* ── Performance card ─────────────────────────────────────── */}
+          {/* ── Performance card ──────────────────────────────────────── */}
           <div className="bg-[#1E293B] border border-[#334155] rounded-2xl p-6 sm:p-8">
             <h3 className="text-lg font-bold text-white mb-4">
               What this build can handle
             </h3>
 
-            {/* Resolution pill */}
             <div className="inline-flex items-center gap-2 bg-[#2563EB]/10 border border-[#2563EB]/25 text-blue-300 text-sm font-semibold px-4 py-2 rounded-full mb-6">
               <span aria-hidden>🖥️</span>
-              {results.performance.resolution}
+              {currentBuild.performance.resolution}
             </div>
 
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 mb-6">
-              {/* Good for */}
               <div>
-                <p className="text-xs font-bold text-emerald-400 uppercase tracking-wider mb-3">
-                  Good for
-                </p>
+                <p className="text-xs font-bold text-emerald-400 uppercase tracking-wider mb-3">Good for</p>
                 <ul className="flex flex-col gap-2.5">
-                  {results.performance.goodFor.map((item) => (
+                  {currentBuild.performance.goodFor.map((item) => (
                     <li key={item} className="flex items-start gap-2.5 text-sm">
                       <CheckCircle2 className="w-4 h-4 text-emerald-400 mt-0.5 shrink-0" aria-hidden />
                       <span className="text-[#94A3B8]">{item}</span>
@@ -414,13 +305,10 @@ export default function BuilderClient() {
                 </ul>
               </div>
 
-              {/* Struggles */}
               <div>
-                <p className="text-xs font-bold text-amber-400 uppercase tracking-wider mb-3">
-                  Struggles with
-                </p>
+                <p className="text-xs font-bold text-amber-400 uppercase tracking-wider mb-3">Struggles with</p>
                 <ul className="flex flex-col gap-2.5">
-                  {results.performance.struggles.map((item) => (
+                  {currentBuild.performance.struggles.map((item) => (
                     <li key={item} className="flex items-start gap-2.5 text-sm">
                       <AlertTriangle className="w-4 h-4 text-amber-400 mt-0.5 shrink-0" aria-hidden />
                       <span className="text-[#94A3B8]">{item}</span>
@@ -430,13 +318,118 @@ export default function BuilderClient() {
               </div>
             </div>
 
-            {/* Upgrade note */}
             <div className="border-t border-[#334155] pt-4 flex items-start gap-2.5">
               <span className="text-base" aria-hidden>💡</span>
               <p className="text-sm text-[#64748B] italic leading-relaxed">
-                {results.performance.upgradeNote}
+                {currentBuild.performance.upgradeNote}
               </p>
             </div>
+          </div>
+
+          {/* ── Tweak your build ─────────────────────────────────────── */}
+          <div className="bg-[#1E293B] border border-[#334155] rounded-2xl overflow-hidden">
+            <button
+              onClick={() => setControlsOpen((o) => !o)}
+              className="w-full flex items-center justify-between gap-3 px-6 py-5 text-left hover:bg-white/[0.03] transition-colors"
+            >
+              <div className="flex items-center gap-3">
+                <SlidersHorizontal className="w-4 h-4 text-[#2563EB]" aria-hidden />
+                <span className="font-semibold text-white">Adjust your build</span>
+                <span className="text-xs text-[#64748B]">
+                  £{budget.toLocaleString("en-GB")} · {ucMeta.label}
+                </span>
+              </div>
+              <span className="text-[#94A3B8] text-sm">{controlsOpen ? "▲" : "▼"}</span>
+            </button>
+
+            {controlsOpen && (
+              <div className="border-t border-[#1E293B] px-6 pb-6 pt-5 flex flex-col gap-6">
+
+                {/* Budget slider */}
+                <div>
+                  <div className="flex items-center justify-between gap-4 mb-4">
+                    <span className="text-sm font-medium text-[#94A3B8]">Budget</span>
+                    <div className="flex items-center gap-1.5">
+                      <span className="text-white font-bold text-xl">£</span>
+                      <input
+                        type="number"
+                        min={MIN}
+                        max={MAX}
+                        step={50}
+                        value={budgetStr}
+                        onChange={onNumberChange}
+                        onBlur={onNumberBlur}
+                        aria-label="Budget in pounds"
+                        className="w-24 bg-[#0F172A] border border-[#334155] focus:border-[#2563EB] text-white font-bold text-xl text-right rounded-xl px-3 py-1.5 focus:outline-none transition-colors tabular-nums"
+                      />
+                    </div>
+                  </div>
+
+                  <input
+                    type="range"
+                    min={MIN}
+                    max={MAX}
+                    step={50}
+                    value={budget}
+                    onChange={onRangeChange}
+                    aria-label="Budget slider"
+                    className="hero-slider w-full h-2 rounded-full appearance-none cursor-pointer mb-3"
+                    style={{
+                      background: `linear-gradient(to right, #2563EB ${sliderPct}%, #1E293B ${sliderPct}%)`,
+                    }}
+                  />
+                  <div className="flex justify-between text-xs text-[#94A3B8] mb-2">
+                    <span>£300</span>
+                    <span>£1,000</span>
+                    <span>£2,000</span>
+                    <span>£3,000</span>
+                  </div>
+
+                  <div className="flex items-center gap-2 mt-3">
+                    <span className="text-xs text-[#64748B]">Tier:</span>
+                    <span className={clsx("text-xs font-semibold px-2.5 py-1 rounded-full", tierMeta.pill)}>
+                      {tierMeta.label}
+                    </span>
+                  </div>
+                </div>
+
+                {/* Use-case selector */}
+                <div>
+                  <p className="text-sm font-medium text-[#94A3B8] mb-3">Use case</p>
+                  <div className="grid grid-cols-2 gap-2">
+                    {USE_CASES.map(({ id, label, desc, Icon }) => {
+                      const active = useCase === id;
+                      return (
+                        <button
+                          key={id}
+                          onClick={() => setUseCase(id)}
+                          aria-pressed={active}
+                          className={clsx(
+                            "flex items-start gap-3 p-3 rounded-xl border-2 text-left transition-all duration-150",
+                            active
+                              ? "border-blue-500 bg-blue-500/10"
+                              : "border-[#334155] bg-[#0F172A]/40 hover:border-[#475569]"
+                          )}
+                        >
+                          <div className={clsx(
+                            "flex items-center justify-center w-9 h-9 rounded-lg shrink-0",
+                            active ? "bg-blue-500/20" : "bg-[#1E293B]"
+                          )}>
+                            <Icon className={clsx("w-4 h-4", active ? "text-blue-400" : "text-[#94A3B8]")} aria-hidden />
+                          </div>
+                          <div className="mt-0.5">
+                            <p className={clsx("font-semibold text-xs", active ? "text-white" : "text-[#CBD5E1]")}>
+                              {label}
+                            </p>
+                            <p className="text-xs text-[#64748B] mt-0.5 leading-tight">{desc}</p>
+                          </div>
+                        </button>
+                      );
+                    })}
+                  </div>
+                </div>
+              </div>
+            )}
           </div>
 
           {/* ── Newsletter capture ────────────────────────────────────── */}
