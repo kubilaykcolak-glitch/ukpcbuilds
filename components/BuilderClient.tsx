@@ -183,29 +183,24 @@ export default function BuilderClient() {
         <div ref={resultsRef} className="flex flex-col gap-6 scroll-mt-20">
 
           {/* Build header */}
-          <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
-            <div>
-              <div className="flex items-center gap-2 flex-wrap mb-1">
-                <span className={clsx("text-xs font-semibold px-2.5 py-1 rounded-full", tierMeta.pill)}>
-                  {tierMeta.label} Build
-                </span>
-                <span className="text-[#94A3B8] text-sm">·</span>
-                <span className="text-[#94A3B8] text-sm">{ucMeta.label}</span>
-              </div>
-              <h1 className="text-2xl sm:text-3xl font-extrabold text-white">
-                Best build for your{" "}
-                <span className="text-[#2563EB]">£{budget.toLocaleString("en-GB")}</span>{" "}
-                budget
-              </h1>
+          <div className="flex flex-col gap-3">
+            <div className="flex items-center gap-2 flex-wrap">
+              <span className={clsx("text-xs font-semibold px-2.5 py-1 rounded-full", tierMeta.pill)}>
+                {tierMeta.label} Build
+              </span>
+              <span className="text-[#94A3B8] text-sm">·</span>
+              <span className="text-[#94A3B8] text-sm">{ucMeta.label}</span>
             </div>
-            <div className="text-right shrink-0">
-              <p className="text-3xl font-extrabold text-[#2563EB]">
-                £{currentBuild.total.toLocaleString("en-GB")}
-              </p>
-              <p className="text-xs text-[#64748B] mt-1">
-                build cost · within your budget
-              </p>
-            </div>
+            <h1 className="text-2xl sm:text-3xl font-extrabold text-white">
+              Best build for your{" "}
+              <span className="text-[#2563EB]">£{budget.toLocaleString("en-GB")}</span>{" "}
+              budget
+            </h1>
+            <p className="text-sm text-[#64748B] leading-relaxed max-w-xl">
+              Here&apos;s the best combination of parts we can put together at this price point.
+              Every component has been chosen for value and compatibility — the total build
+              cost is shown at the bottom of the list.
+            </p>
           </div>
 
           {/* ── Parts table ─────────────────────────────────────────── */}
@@ -259,11 +254,16 @@ export default function BuilderClient() {
 
                   {/* Total row */}
                   <tr className="bg-[#0F172A]/60 border-t-2 border-[#334155]">
-                    <td colSpan={2} className="px-5 py-4 text-white font-bold text-base">
-                      Total
+                    <td colSpan={2} className="px-5 py-5">
+                      <p className="text-white font-bold text-base">Total build cost</p>
+                      <p className="text-xs text-[#64748B] mt-0.5">
+                        All parts included · within your £{budget.toLocaleString("en-GB")} budget
+                      </p>
                     </td>
-                    <td className="px-5 py-4 text-right text-[#2563EB] font-extrabold text-base tabular-nums">
-                      £{currentBuild.total.toLocaleString("en-GB")}
+                    <td className="px-5 py-5 text-right">
+                      <p className="text-[#2563EB] font-extrabold text-xl tabular-nums">
+                        £{currentBuild.total.toLocaleString("en-GB")}
+                      </p>
                     </td>
                     <td />
                   </tr>
