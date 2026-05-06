@@ -70,12 +70,19 @@ const USE_CASES: {
 
 // ── Helpers ───────────────────────────────────────────────────────────────────
 
+const TIER_ORDER: TierKey[] = ["entry", "budget", "mid", "high", "enthusiast"];
+
 function getTier(budget: number): TierKey {
   if (budget <= 670)  return "entry";
   if (budget <= 1100) return "budget";
   if (budget <= 1600) return "mid";
   if (budget <= 2800) return "high";
   return "enthusiast";
+}
+
+function getLowerTier(tier: TierKey): TierKey | null {
+  const idx = TIER_ORDER.indexOf(tier);
+  return idx > 0 ? TIER_ORDER[idx - 1] : null;
 }
 
 function clamp(v: number) {
@@ -171,6 +178,20 @@ export default function BuilderClient() {
   const tierMeta  = TIER_META[tier];
   const ucMeta    = USE_CASES.find((u) => u.id === useCase)!;
 
+  // ── Downgrade hints ────────────────────────────────────────────────────────
+  const isOverBudget = currentBuild !== null && currentBuild.total > budget;
+  const overBy       = currentBuild ? currentBuild.total - budget : 0;
+  const lowerTierKey = getLowerTier(tier);
+  const lowerBuild   = lowerTierKey ? (BUILDS[lowerTierKey]?.useCases?.[useCase] ?? null) : null;
+
+  // Returns how much cheaper the lower-tier equivalent part is (or null if no saving)
+  function downgradeSaving(part: Part): number | null {
+    if (!isOverBudget || !lowerBuild) return null;
+    const alt = lowerBuild.parts.find((p) => p.type === part.type);
+    if (!alt || alt.price >= part.price) return null;
+    return part.price - alt.price;
+  };
+
   // ── Render ─────────────────────────────────────────────────────────────────
 
   return (
@@ -203,6 +224,19 @@ export default function BuilderClient() {
             </p>
           </div>
 
+          {/* ── Over-budget banner ──────────────────────────────────── */}
+          {isOverBudget && (
+            <div className="flex items-start gap-3 bg-amber-500/10 border border-amber-500/25 rounded-xl px-4 py-3">
+              <AlertTriangle className="w-4 h-4 text-amber-400 mt-0.5 shrink-0" aria-hidden />
+              <p className="text-sm text-amber-300 leading-relaxed">
+                This build costs{" "}
+                <span className="font-semibold">£{overBy.toLocaleString("en-GB")} over your budget.</span>{" "}
+                Parts marked <span className="font-semibold">⬇ Downgrade</span> below can be swapped
+                for a cheaper alternative with a small performance trade-off.
+              </p>
+            </div>
+          )}
+
           {/* ── Parts table ─────────────────────────────────────────── */}
           <div className="bg-[#1E293B] border border-[#334155] rounded-2xl overflow-hidden">
             <div className="overflow-x-auto">
@@ -225,7 +259,17 @@ export default function BuilderClient() {
                         {part.type}
                       </td>
                       <td className="px-5 py-4 align-top">
-                        <p className="text-white font-medium leading-snug">{part.name}</p>
+                        <div className="flex items-center gap-2 flex-wrap">
+                          <p className="text-white font-medium leading-snug">{part.name}</p>
+                          {(() => {
+                            const saving = downgradeSaving(part);
+                            return saving ? (
+                              <span className="inline-flex items-center gap-1 text-xs font-semibold bg-amber-500/10 text-amber-400 border border-amber-500/25 px-2 py-0.5 rounded-full whitespace-nowrap">
+                                ⬇ Downgrade · save £{saving}
+                              </span>
+                            ) : null;
+                          })()}
+                        </div>
                         <p className="text-xs text-[#64748B] mt-1 leading-relaxed max-w-md">{part.why}</p>
                       </td>
                       <td className="px-5 py-4 text-right font-semibold tabular-nums align-top whitespace-nowrap">
