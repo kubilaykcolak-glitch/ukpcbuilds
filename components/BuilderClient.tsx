@@ -18,6 +18,7 @@ type UseCaseKey = "gaming" | "office" | "creation" | "performance";
 interface Part {
   type: string;
   name: string;
+  perfTier?: number;
   price: number;
   retailer: string;
   affiliateUrl: string;
@@ -91,6 +92,18 @@ function clamp(v: number) {
 
 function snapTo50(v: number) {
   return Math.round(v / 50) * 50;
+}
+
+type BalanceStatus = "balanced" | "cpu-bottleneck" | "gpu-bottleneck" | "unchecked";
+
+function getBalanceStatus(parts: Part[], currentUseCase: UseCaseKey): BalanceStatus {
+  if (currentUseCase === "office") return "unchecked";
+  const cpu = parts.find((p) => p.type === "CPU");
+  const gpu = parts.find((p) => p.type === "GPU");
+  if (!cpu?.perfTier || !gpu?.perfTier || gpu.perfTier === 0) return "unchecked";
+  const gap = cpu.perfTier - gpu.perfTier;
+  if (Math.abs(gap) <= 1) return "balanced";
+  return gap > 1 ? "gpu-bottleneck" : "cpu-bottleneck";
 }
 
 function parseBudget(raw: string | null): number {
@@ -199,6 +212,8 @@ export default function BuilderClient() {
     : [];
   const effectiveTotal = effectiveParts.reduce((s, p) => s + p.price, 0);
 
+  const balanceStatus = currentBuild ? getBalanceStatus(effectiveParts, useCase) : "unchecked";
+
   const isOverBudget = currentBuild !== null && effectiveTotal > budget;
   const overBy       = isOverBudget ? effectiveTotal - budget : 0;
 
@@ -246,6 +261,21 @@ export default function BuilderClient() {
                 </span>
                 <span className="text-[#94A3B8] text-sm">·</span>
                 <span className="text-[#94A3B8] text-sm">{ucMeta.label}</span>
+                {balanceStatus === "balanced" && (
+                  <span className="inline-flex items-center gap-1 text-xs font-semibold bg-emerald-500/10 text-emerald-400 border border-emerald-500/25 px-2.5 py-1 rounded-full">
+                    ✓ Balanced build
+                  </span>
+                )}
+                {balanceStatus === "gpu-bottleneck" && (
+                  <span className="inline-flex items-center gap-1 text-xs font-semibold bg-amber-500/10 text-amber-400 border border-amber-500/25 px-2.5 py-1 rounded-full">
+                    ⚠ GPU may limit CPU
+                  </span>
+                )}
+                {balanceStatus === "cpu-bottleneck" && (
+                  <span className="inline-flex items-center gap-1 text-xs font-semibold bg-amber-500/10 text-amber-400 border border-amber-500/25 px-2.5 py-1 rounded-full">
+                    ⚠ CPU may limit GPU
+                  </span>
+                )}
               </div>
               <h1 className="text-2xl sm:text-3xl font-extrabold text-white">
                 Best build for your{" "}
