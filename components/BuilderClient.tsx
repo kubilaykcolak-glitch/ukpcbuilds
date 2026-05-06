@@ -184,13 +184,16 @@ export default function BuilderClient() {
   const lowerTierKey = getLowerTier(tier);
   const lowerBuild   = lowerTierKey ? (BUILDS[lowerTierKey]?.useCases?.[useCase] ?? null) : null;
 
-  // Returns how much cheaper the lower-tier equivalent part is (or null if no saving)
-  function downgradeSaving(part: Part): number | null {
-    if (!isOverBudget || !lowerBuild) return null;
-    const alt = lowerBuild.parts.find((p) => p.type === part.type);
-    if (!alt || alt.price >= part.price) return null;
-    return part.price - alt.price;
-  };
+  interface DowngradeOption { part: Part; alt: Part; saving: number }
+  const downgradeOptions: DowngradeOption[] =
+    isOverBudget && currentBuild && lowerBuild
+      ? currentBuild.parts.flatMap((part) => {
+          const alt = lowerBuild.parts.find((p) => p.type === part.type);
+          if (!alt || alt.price >= part.price) return [];
+          return [{ part, alt, saving: part.price - alt.price }];
+        })
+      : [];
+  const totalDowngradeSaving = downgradeOptions.reduce((s, o) => s + o.saving, 0);;
 
   // ── Render ─────────────────────────────────────────────────────────────────
 
@@ -229,10 +232,10 @@ export default function BuilderClient() {
             <div className="flex items-start gap-3 bg-amber-500/10 border border-amber-500/25 rounded-xl px-4 py-3">
               <AlertTriangle className="w-4 h-4 text-amber-400 mt-0.5 shrink-0" aria-hidden />
               <p className="text-sm text-amber-300 leading-relaxed">
-                This build costs{" "}
+                This build is{" "}
                 <span className="font-semibold">£{overBy.toLocaleString("en-GB")} over your budget.</span>{" "}
-                Parts marked <span className="font-semibold">⬇ Downgrade</span> below can be swapped
-                for a cheaper alternative with a small performance trade-off.
+                See <span className="font-semibold">Downgrade options</span> below the parts list for
+                specific swaps that will bring the cost down.
               </p>
             </div>
           )}
@@ -259,17 +262,7 @@ export default function BuilderClient() {
                         {part.type}
                       </td>
                       <td className="px-5 py-4 align-top">
-                        <div className="flex items-center gap-2 flex-wrap">
-                          <p className="text-white font-medium leading-snug">{part.name}</p>
-                          {(() => {
-                            const saving = downgradeSaving(part);
-                            return saving ? (
-                              <span className="inline-flex items-center gap-1 text-xs font-semibold bg-amber-500/10 text-amber-400 border border-amber-500/25 px-2 py-0.5 rounded-full whitespace-nowrap">
-                                ⬇ Downgrade · save £{saving}
-                              </span>
-                            ) : null;
-                          })()}
-                        </div>
+                        <p className="text-white font-medium leading-snug">{part.name}</p>
                         <p className="text-xs text-[#64748B] mt-1 leading-relaxed max-w-md">{part.why}</p>
                       </td>
                       <td className="px-5 py-4 text-right font-semibold tabular-nums align-top whitespace-nowrap">
@@ -328,6 +321,73 @@ export default function BuilderClient() {
               </a>
             </div>
           </div>
+
+          {/* ── Downgrade options card ───────────────────────────────── */}
+          {isOverBudget && downgradeOptions.length > 0 && (
+            <div className="bg-[#1E293B] border border-amber-500/25 rounded-2xl overflow-hidden">
+              {/* Card header */}
+              <div className="flex items-center gap-3 px-6 py-4 border-b border-[#334155]">
+                <AlertTriangle className="w-4 h-4 text-amber-400 shrink-0" aria-hidden />
+                <div>
+                  <h3 className="text-sm font-bold text-white">Downgrade options</h3>
+                  <p className="text-xs text-[#64748B] mt-0.5">
+                    Swap these parts to save up to{" "}
+                    <span className="text-amber-400 font-semibold">
+                      £{totalDowngradeSaving.toLocaleString("en-GB")}
+                    </span>{" "}
+                    with a small performance trade-off
+                  </p>
+                </div>
+              </div>
+
+              {/* Swap rows */}
+              <div className="divide-y divide-[#0F172A]">
+                {downgradeOptions.map(({ part, alt, saving }) => (
+                  <div key={part.type} className="px-6 py-4 flex flex-col sm:flex-row sm:items-center gap-3">
+                    {/* Component label */}
+                    <span className="text-xs font-semibold text-[#64748B] uppercase tracking-wide w-24 shrink-0">
+                      {part.type}
+                    </span>
+
+                    {/* From → To */}
+                    <div className="flex-1 flex flex-col sm:flex-row sm:items-center gap-2">
+                      {/* Current (from) */}
+                      <div className="flex-1 bg-[#0F172A] rounded-xl px-4 py-3">
+                        <p className="text-xs text-[#64748B] mb-1">Current</p>
+                        <p className="text-sm font-semibold text-white leading-snug">{part.name}</p>
+                        <p className="text-sm font-bold text-white mt-1">£{part.price.toLocaleString("en-GB")}</p>
+                      </div>
+
+                      {/* Arrow */}
+                      <div className="text-amber-400 font-bold text-lg sm:mx-2 text-center">→</div>
+
+                      {/* Alternative (to) */}
+                      <div className="flex-1 bg-amber-500/5 border border-amber-500/20 rounded-xl px-4 py-3">
+                        <p className="text-xs text-amber-400/70 mb-1">Downgrade to</p>
+                        <p className="text-sm font-semibold text-white leading-snug">{alt.name}</p>
+                        <p className="text-sm font-bold text-amber-400 mt-1">£{alt.price.toLocaleString("en-GB")}</p>
+                      </div>
+                    </div>
+
+                    {/* Saving badge */}
+                    <div className="sm:text-right shrink-0">
+                      <span className="inline-flex items-center gap-1 text-xs font-bold bg-amber-500/10 text-amber-400 border border-amber-500/25 px-3 py-1.5 rounded-full">
+                        Save £{saving.toLocaleString("en-GB")}
+                      </span>
+                    </div>
+                  </div>
+                ))}
+              </div>
+
+              {/* Total saving footer */}
+              <div className="flex items-center justify-between px-6 py-4 border-t border-[#334155] bg-[#0F172A]/40">
+                <p className="text-sm text-[#94A3B8]">Total saving if all swaps applied</p>
+                <p className="text-base font-extrabold text-amber-400">
+                  £{totalDowngradeSaving.toLocaleString("en-GB")}
+                </p>
+              </div>
+            </div>
+          )}
 
           {/* ── Performance card ──────────────────────────────────────── */}
           <div className="bg-[#1E293B] border border-[#334155] rounded-2xl p-6 sm:p-8">
