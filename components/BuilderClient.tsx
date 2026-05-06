@@ -102,8 +102,8 @@ function getBalanceStatus(parts: Part[], currentUseCase: UseCaseKey): BalanceSta
   const gpu = parts.find((p) => p.type === "GPU");
   if (!cpu?.perfTier || !gpu?.perfTier || gpu.perfTier === 0) return "unchecked";
   const gap = cpu.perfTier - gpu.perfTier;
-  if (Math.abs(gap) <= 1) return "balanced";
-  return gap > 1 ? "gpu-bottleneck" : "cpu-bottleneck";
+  if (gap === 0) return "balanced";
+  return gap > 0 ? "gpu-bottleneck" : "cpu-bottleneck";
 }
 
 function parseBudget(raw: string | null): number {
@@ -261,30 +261,12 @@ export default function BuilderClient() {
                 </span>
                 <span className="text-[#94A3B8] text-sm">·</span>
                 <span className="text-[#94A3B8] text-sm">{ucMeta.label}</span>
-                {balanceStatus === "balanced" && (
-                  <span className="inline-flex items-center gap-1 text-xs font-semibold bg-emerald-500/10 text-emerald-400 border border-emerald-500/25 px-2.5 py-1 rounded-full">
-                    ✓ Balanced build
-                  </span>
-                )}
-                {balanceStatus === "gpu-bottleneck" && (
-                  <span className="inline-flex items-center gap-1 text-xs font-semibold bg-amber-500/10 text-amber-400 border border-amber-500/25 px-2.5 py-1 rounded-full">
-                    ⚠ GPU may limit CPU
-                  </span>
-                )}
-                {balanceStatus === "cpu-bottleneck" && (
-                  <span className="inline-flex items-center gap-1 text-xs font-semibold bg-amber-500/10 text-amber-400 border border-amber-500/25 px-2.5 py-1 rounded-full">
-                    ⚠ CPU may limit GPU
-                  </span>
-                )}
               </div>
               <h1 className="text-2xl sm:text-3xl font-extrabold text-white">
                 Best build for your{" "}
                 <span className="text-[#2563EB]">£{budget.toLocaleString("en-GB")}</span>{" "}
                 budget
               </h1>
-              <p className="text-sm text-[#64748B] leading-relaxed">
-                Here&apos;s the best combination of parts at this price point — adjust below to update the list instantly.
-              </p>
             </div>
 
             <div className="border-t border-[#334155]" />
@@ -373,18 +355,47 @@ export default function BuilderClient() {
 
           </div>
 
-          {/* ── Over-budget banner ──────────────────────────────────── */}
-          {isOverBudget && (
-            <div className="flex items-start gap-3 bg-amber-500/10 border border-amber-500/25 rounded-xl px-4 py-3">
-              <AlertTriangle className="w-4 h-4 text-amber-400 mt-0.5 shrink-0" aria-hidden />
-              <p className="text-sm text-amber-300 leading-relaxed">
-                This build is{" "}
-                <span className="font-semibold">£{overBy.toLocaleString("en-GB")} over your budget.</span>{" "}
-                See <span className="font-semibold">Downgrade options</span> below the parts list for
-                specific swaps that will bring the cost down.
-              </p>
+          {/* ── Build status bar ────────────────────────────────────── */}
+          <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 bg-[#1E293B] border border-[#334155] rounded-xl px-5 py-3.5">
+
+            {/* Left: total + budget status */}
+            <div className="flex items-center gap-3 flex-wrap">
+              <span className="text-2xl font-extrabold text-white tabular-nums">
+                £{effectiveTotal.toLocaleString("en-GB")}
+              </span>
+              {isOverBudget ? (
+                <span className="inline-flex items-center gap-1.5 text-xs font-semibold bg-amber-500/10 text-amber-400 border border-amber-500/25 px-2.5 py-1 rounded-full">
+                  <AlertTriangle className="w-3 h-3" aria-hidden />
+                  £{overBy.toLocaleString("en-GB")} over budget
+                </span>
+              ) : (
+                <span className="inline-flex items-center gap-1.5 text-xs font-semibold bg-emerald-500/10 text-emerald-400 border border-emerald-500/25 px-2.5 py-1 rounded-full">
+                  <CheckCircle2 className="w-3 h-3" aria-hidden />
+                  Within budget
+                </span>
+              )}
             </div>
-          )}
+
+            {/* Right: balance status */}
+            {balanceStatus === "balanced" && (
+              <span className="inline-flex items-center gap-1.5 text-xs font-semibold bg-emerald-500/10 text-emerald-400 border border-emerald-500/25 px-3 py-1.5 rounded-full whitespace-nowrap">
+                <CheckCircle2 className="w-3.5 h-3.5" aria-hidden />
+                Balanced build
+              </span>
+            )}
+            {balanceStatus === "gpu-bottleneck" && (
+              <span className="inline-flex items-center gap-1.5 text-xs font-semibold bg-amber-500/10 text-amber-400 border border-amber-500/25 px-3 py-1.5 rounded-full whitespace-nowrap">
+                <AlertTriangle className="w-3.5 h-3.5" aria-hidden />
+                GPU is limiting — consider a GPU upgrade
+              </span>
+            )}
+            {balanceStatus === "cpu-bottleneck" && (
+              <span className="inline-flex items-center gap-1.5 text-xs font-semibold bg-amber-500/10 text-amber-400 border border-amber-500/25 px-3 py-1.5 rounded-full whitespace-nowrap">
+                <AlertTriangle className="w-3.5 h-3.5" aria-hidden />
+                CPU is limiting — consider a CPU upgrade
+              </span>
+            )}
+          </div>
 
           {/* ── Parts table ─────────────────────────────────────────── */}
           <div className="bg-[#1E293B] border border-[#334155] rounded-2xl overflow-hidden">
