@@ -1,82 +1,82 @@
 {
   "entry": {
     "label": "Entry Build",
-    "priceRange": [300, 450],
+    "priceRange": [400, 670],
     "useCases": {
       "gaming": {
         "parts": [
-          { "type": "CPU",     "name": "AMD Ryzen 5 5500",          "price": 70,  "retailer": "Amazon UK",  "affiliateUrl": "#", "why": "Six-core Zen 3 CPU delivering solid 1080p gaming performance at a bargain price." },
-          { "type": "Cooler",  "name": "AMD Wraith Stealth (boxed)", "price": 0,   "retailer": "Included",   "affiliateUrl": "#", "why": "Bundled cooler is adequate for the 65 W TDP of the 5500." },
-          { "type": "Motherboard", "name": "ASRock B450M-HDV R4.0", "price": 60,  "retailer": "Scan",       "affiliateUrl": "#", "why": "Micro-ATX B450 board; cheap, reliable, supports PCIe 3.0 GPU." },
-          { "type": "RAM",     "name": "Corsair Vengeance 16 GB DDR4-3200 (2×8 GB)", "price": 35, "retailer": "Amazon UK", "affiliateUrl": "#", "why": "16 GB is the minimum for modern gaming; dual-channel boosts Ryzen throughput." },
-          { "type": "GPU",     "name": "AMD Radeon RX 6600",         "price": 130, "retailer": "Overclockers UK", "affiliateUrl": "#", "why": "Excellent 1080p rasterisation performance and only 100 W TDP." },
-          { "type": "Storage", "name": "Kingston NV3 1 TB NVMe",     "price": 45,  "retailer": "Amazon UK",  "affiliateUrl": "#", "why": "PCIe 4.0 NVMe at a budget price; fast enough for game load times." },
-          { "type": "PSU",     "name": "Corsair CV550 550 W 80+ Bronze", "price": 45, "retailer": "Scan",   "affiliateUrl": "#", "why": "Plenty of headroom for this low-power build; reliable brand." },
-          { "type": "Case",    "name": "BitFenix Nova Mesh",          "price": 40,  "retailer": "Novatech",  "affiliateUrl": "#", "why": "Good airflow mesh front panel; fits Micro-ATX and ATX boards." }
+          { "type": "CPU",     "name": "AMD Ryzen 5 5600",                          "price": 116, "retailer": "Amazon UK",       "affiliateUrl": "#", "why": "Six-core Zen 3 CPU delivering solid 1080p gaming performance at excellent value on the proven AM4 platform." },
+          { "type": "Cooler",  "name": "AMD Wraith Stealth (boxed)",                "price": 0,   "retailer": "Included",        "affiliateUrl": "#", "why": "Bundled cooler is adequate for the 65 W TDP of the 5600." },
+          { "type": "Motherboard", "name": "ASRock B450M-HDV R4.0",               "price": 60,  "retailer": "Scan",            "affiliateUrl": "#", "why": "Micro-ATX B450 board; cheap, reliable, supports PCIe 3.0 GPU — perfectly adequate for the RTX 5060." },
+          { "type": "RAM",     "name": "Corsair Vengeance 16 GB DDR4-3200 (2×8 GB)","price": 35, "retailer": "Amazon UK",       "affiliateUrl": "#", "why": "16 GB dual-channel is the minimum for modern gaming; boosts Ryzen memory throughput." },
+          { "type": "GPU",     "name": "ZOTAC GeForce RTX 5060 SOLO 8 GB GDDR7",   "price": 270, "retailer": "Scan",            "affiliateUrl": "#", "why": "Blackwell architecture with DLSS 4 Multi Frame Generation and 8 GB GDDR7 — the best-value entry gaming GPU available in 2026." },
+          { "type": "Storage", "name": "Kingston NV3 1 TB NVMe",                   "price": 45,  "retailer": "Amazon UK",       "affiliateUrl": "#", "why": "PCIe 4.0 NVMe at a budget price; fast enough for game load times." },
+          { "type": "PSU",     "name": "Corsair CV550 550 W 80+ Bronze",            "price": 45,  "retailer": "Scan",            "affiliateUrl": "#", "why": "Plenty of headroom for this 150 W total-system build; reliable brand." },
+          { "type": "Case",    "name": "BitFenix Nova Mesh",                        "price": 40,  "retailer": "Novatech",        "affiliateUrl": "#", "why": "Good airflow mesh front panel; fits Micro-ATX and ATX boards." }
         ],
-        "total": 425,
+        "total": 611,
         "performance": {
           "resolution": "1080p",
-          "goodFor": ["Fortnite (High, 100+ fps)", "Minecraft (max settings)", "Valorant (High, 200+ fps)", "GTA V (High settings)"],
+          "goodFor": ["Fortnite (High, 120+ fps)", "Minecraft (max settings)", "Valorant (High, 200+ fps)", "GTA V (High settings)"],
           "struggles": ["4K gaming", "ray tracing", "AAA at Ultra settings"],
-          "upgradeNote": "Swap the RX 6600 for an RX 7600 XT later to extend life at 1080p."
+          "upgradeNote": "Swap the RTX 5060 for an RTX 5060 Ti to push confident 1440p gaming."
         }
       },
       "office": {
         "parts": [
-          { "type": "CPU",     "name": "AMD Ryzen 5 5500",          "price": 70,  "retailer": "Amazon UK",  "affiliateUrl": "#", "why": "More than enough for web, Office, and video calls." },
-          { "type": "Cooler",  "name": "AMD Wraith Stealth (boxed)", "price": 0,   "retailer": "Included",   "affiliateUrl": "#", "why": "Adequate thermal solution for light workloads." },
-          { "type": "Motherboard", "name": "ASRock B450M-HDV R4.0", "price": 60,  "retailer": "Scan",       "affiliateUrl": "#", "why": "Stable, feature-complete B450 board for office duties." },
-          { "type": "RAM",     "name": "Crucial CT2K8G4DFRA32A 16 GB DDR4-3200", "price": 30, "retailer": "Crucial UK", "affiliateUrl": "#", "why": "16 GB ensures smooth multitasking across browser tabs and Office apps." },
-          { "type": "GPU",     "name": "AMD Radeon RX 6400 (no aux power)", "price": 80, "retailer": "Amazon UK", "affiliateUrl": "#", "why": "No extra power connector needed; drives dual 1080p monitors easily." },
-          { "type": "Storage", "name": "Kingston NV3 500 GB NVMe",   "price": 28,  "retailer": "Amazon UK",  "affiliateUrl": "#", "why": "Fast boot and app launch; 500 GB is fine for documents and light use." },
-          { "type": "PSU",     "name": "Corsair CV450 450 W 80+ Bronze", "price": 40, "retailer": "Scan",   "affiliateUrl": "#", "why": "Low wattage draw means this PSU has plenty of overhead." },
-          { "type": "Case",    "name": "Fractal Design Core 1000",   "price": 35,  "retailer": "Amazon UK",  "affiliateUrl": "#", "why": "Compact, tidy Micro-ATX case; quiet operation for an office environment." }
+          { "type": "CPU",     "name": "AMD Ryzen 5 7600",                          "price": 154, "retailer": "Amazon UK",       "affiliateUrl": "#", "why": "Zen 4 with integrated Radeon 740M graphics — eliminates the need for a discrete GPU in an office build." },
+          { "type": "Cooler",  "name": "AMD Wraith Prism (boxed)",                  "price": 0,   "retailer": "Included",        "affiliateUrl": "#", "why": "Adequate thermal solution for light office workloads at 65 W." },
+          { "type": "Motherboard", "name": "MSI PRO A620M-E",                      "price": 80,  "retailer": "Overclockers UK", "affiliateUrl": "#", "why": "Budget AM5 board with full DisplayPort and HDMI output from the integrated GPU." },
+          { "type": "RAM",     "name": "Kingston Fury Beast 16 GB DDR5-5600 (2×8 GB)","price": 55,"retailer": "Amazon UK",       "affiliateUrl": "#", "why": "Fast DDR5 shared with iGPU; 16 GB handles office multitasking comfortably." },
+          { "type": "GPU",     "name": "AMD Radeon 740M (integrated)",              "price": 0,   "retailer": "Integrated",      "affiliateUrl": "#", "why": "Drives dual 1440p monitors; zero additional cost or power draw." },
+          { "type": "Storage", "name": "Kingston NV3 500 GB NVMe",                 "price": 30,  "retailer": "Amazon UK",       "affiliateUrl": "#", "why": "Fast boot and app launch; 500 GB is fine for documents and light use." },
+          { "type": "PSU",     "name": "Corsair CV450 450 W 80+ Bronze",            "price": 40,  "retailer": "Scan",            "affiliateUrl": "#", "why": "CPU-only system draws under 100 W total; plenty of headroom." },
+          { "type": "Case",    "name": "Fractal Design Core 1000",                  "price": 35,  "retailer": "Amazon UK",       "affiliateUrl": "#", "why": "Compact, quiet Micro-ATX case; suits a tidy office desk." }
         ],
-        "total": 343,
+        "total": 394,
         "performance": {
-          "resolution": "1080p dual-monitor",
+          "resolution": "Dual 1440p",
           "goodFor": ["Microsoft Office / 365", "Google Chrome (20+ tabs)", "Teams / Zoom video calls", "Light photo editing (GIMP)"],
-          "struggles": ["4K video export", "3D rendering", "heavy virtual machines"],
-          "upgradeNote": "Add a second NVMe drive for more storage if needed."
+          "struggles": ["GPU-accelerated video exports", "gaming above casual titles", "3D design software"],
+          "upgradeNote": "Add an RTX 5060 for a capable dual-purpose office / gaming machine."
         }
       },
       "creation": {
         "parts": [
-          { "type": "CPU",     "name": "AMD Ryzen 5 5600",          "price": 90,  "retailer": "Amazon UK",  "affiliateUrl": "#", "why": "Six cores with slightly higher clocks than 5500; better for lightly-threaded render tasks." },
-          { "type": "Cooler",  "name": "AMD Wraith Stealth (boxed)", "price": 0,   "retailer": "Included",   "affiliateUrl": "#", "why": "Sufficient for the 65 W TDP; keep noise low in a home studio." },
-          { "type": "Motherboard", "name": "MSI B450 Tomahawk MAX II", "price": 80, "retailer": "Overclockers UK", "affiliateUrl": "#", "why": "Solid VRM for stable all-core loads during rendering." },
-          { "type": "RAM",     "name": "G.Skill Ripjaws V 32 GB DDR4-3200 (2×16 GB)", "price": 65, "retailer": "Scan", "affiliateUrl": "#", "why": "32 GB prevents page-file thrashing in Premiere Pro or DaVinci Resolve." },
-          { "type": "GPU",     "name": "AMD Radeon RX 6600",         "price": 130, "retailer": "Overclockers UK", "affiliateUrl": "#", "why": "8 GB VRAM handles 1080p timeline scrubbing in DaVinci Resolve without dropping to software decode." },
-          { "type": "Storage", "name": "Kingston NV3 1 TB NVMe",     "price": 45,  "retailer": "Amazon UK",  "affiliateUrl": "#", "why": "Fast scratch drive for video projects." },
-          { "type": "PSU",     "name": "Corsair CV550 550 W 80+ Bronze", "price": 45, "retailer": "Scan",   "affiliateUrl": "#", "why": "Comfortable headroom for sustained all-core CPU loads." },
-          { "type": "Case",    "name": "BitFenix Nova Mesh",          "price": 40,  "retailer": "Novatech",  "affiliateUrl": "#", "why": "Mesh front promotes airflow for sustained workloads." }
+          { "type": "CPU",     "name": "AMD Ryzen 5 5600",                          "price": 116, "retailer": "Amazon UK",       "affiliateUrl": "#", "why": "Six cores with strong single-thread performance; handles lightly-threaded export tasks well." },
+          { "type": "Cooler",  "name": "AMD Wraith Stealth (boxed)",                "price": 0,   "retailer": "Included",        "affiliateUrl": "#", "why": "Sufficient for the 65 W TDP; keeps noise low in a home studio." },
+          { "type": "Motherboard", "name": "MSI B450 Tomahawk MAX II",             "price": 80,  "retailer": "Overclockers UK", "affiliateUrl": "#", "why": "Solid VRM for stable all-core loads during rendering." },
+          { "type": "RAM",     "name": "G.Skill Ripjaws V 32 GB DDR4-3200 (2×16 GB)","price": 65,"retailer": "Scan",            "affiliateUrl": "#", "why": "32 GB prevents page-file thrashing in Premiere Pro or DaVinci Resolve." },
+          { "type": "GPU",     "name": "ZOTAC GeForce RTX 5060 SOLO 8 GB GDDR7",   "price": 270, "retailer": "Scan",            "affiliateUrl": "#", "why": "8 GB GDDR7 and NVENC AV1 encoder handle 1080p timeline scrubbing in DaVinci Resolve." },
+          { "type": "Storage", "name": "Kingston NV3 1 TB NVMe",                   "price": 45,  "retailer": "Amazon UK",       "affiliateUrl": "#", "why": "Fast scratch drive for video projects." },
+          { "type": "PSU",     "name": "Corsair CV550 550 W 80+ Bronze",            "price": 45,  "retailer": "Scan",            "affiliateUrl": "#", "why": "Comfortable headroom for sustained all-core CPU loads." },
+          { "type": "Case",    "name": "BitFenix Nova Mesh",                        "price": 40,  "retailer": "Novatech",        "affiliateUrl": "#", "why": "Mesh front promotes airflow for sustained workloads." }
         ],
-        "total": 495,
+        "total": 661,
         "performance": {
           "resolution": "1080p export",
           "goodFor": ["1080p video editing (DaVinci Resolve)", "Photoshop / Lightroom", "Streaming at 1080p60", "Illustration (Affinity Designer)"],
-          "struggles": ["4K timeline editing in real time", "3D rendering (Blender cycles)", "heavy VFX compositing"],
-          "upgradeNote": "Upgrade to Ryzen 7 5700X3D for much faster Blender renders when budget allows."
+          "struggles": ["4K timeline editing in real time", "3D rendering (Blender Cycles)", "heavy VFX compositing"],
+          "upgradeNote": "Upgrade to Ryzen 7 7700 on AM5 with more RAM for much faster multi-threaded renders."
         }
       },
       "performance": {
         "parts": [
-          { "type": "CPU",     "name": "AMD Ryzen 5 5600",           "price": 90,  "retailer": "Amazon UK",  "affiliateUrl": "#", "why": "Punchy single-thread performance for fast task completion." },
-          { "type": "Cooler",  "name": "AMD Wraith Stealth (boxed)",  "price": 0,   "retailer": "Included",   "affiliateUrl": "#", "why": "Low-overhead workloads don't stress the cooler." },
-          { "type": "Motherboard", "name": "ASRock B450M Pro4-F",    "price": 70,  "retailer": "Scan",       "affiliateUrl": "#", "why": "Reliable B450 board with good M.2 placement." },
-          { "type": "RAM",     "name": "Corsair Vengeance LPX 16 GB DDR4-3600 (2×8 GB)", "price": 40, "retailer": "Amazon UK", "affiliateUrl": "#", "why": "DDR4-3600 is the sweet spot for Ryzen bandwidth-to-latency ratio." },
-          { "type": "GPU",     "name": "AMD Radeon RX 6650 XT",      "price": 145, "retailer": "Overclockers UK", "affiliateUrl": "#", "why": "Higher clocks than the 6600 push more fps in compute-limited scenarios." },
-          { "type": "Storage", "name": "Samsung 870 EVO 500 GB SATA SSD", "price": 45, "retailer": "Amazon UK", "affiliateUrl": "#", "why": "Reliable, consistent latency for OS and frequently-used apps." },
-          { "type": "PSU",     "name": "be quiet! System Power 9 500 W 80+ Bronze", "price": 50, "retailer": "Scan", "affiliateUrl": "#", "why": "Known for low ripple; better long-term component stability." },
-          { "type": "Case",    "name": "Fractal Design Pop Air",      "price": 60,  "retailer": "Amazon UK",  "affiliateUrl": "#", "why": "Outstanding stock airflow keeps thermals flat under load." }
+          { "type": "CPU",     "name": "AMD Ryzen 5 5600",                          "price": 116, "retailer": "Amazon UK",       "affiliateUrl": "#", "why": "Punchy single-thread performance for fast task completion at a budget price." },
+          { "type": "Cooler",  "name": "AMD Wraith Stealth (boxed)",                "price": 0,   "retailer": "Included",        "affiliateUrl": "#", "why": "Low-overhead workloads don't stress the cooler." },
+          { "type": "Motherboard", "name": "ASRock B450M Pro4-F",                  "price": 70,  "retailer": "Scan",            "affiliateUrl": "#", "why": "Reliable B450 board with good M.2 slot placement." },
+          { "type": "RAM",     "name": "Corsair Vengeance LPX 16 GB DDR4-3600 (2×8 GB)","price": 40,"retailer": "Amazon UK",   "affiliateUrl": "#", "why": "DDR4-3600 is the sweet spot for Ryzen bandwidth-to-latency ratio." },
+          { "type": "GPU",     "name": "ZOTAC GeForce RTX 5060 SOLO 8 GB GDDR7",   "price": 270, "retailer": "Scan",            "affiliateUrl": "#", "why": "DLSS 4 and Blackwell architecture deliver high frame rates in e-sports titles with minimal power draw." },
+          { "type": "Storage", "name": "Samsung 870 EVO 500 GB SATA SSD",          "price": 45,  "retailer": "Amazon UK",       "affiliateUrl": "#", "why": "Reliable, consistent latency for OS and frequently-used apps." },
+          { "type": "PSU",     "name": "be quiet! System Power 9 500 W 80+ Bronze", "price": 50, "retailer": "Scan",            "affiliateUrl": "#", "why": "Known for low ripple; better long-term component stability." },
+          { "type": "Case",    "name": "Fractal Design Pop Air",                    "price": 60,  "retailer": "Amazon UK",       "affiliateUrl": "#", "why": "Outstanding stock airflow keeps thermals flat under load." }
         ],
-        "total": 500,
+        "total": 651,
         "performance": {
           "resolution": "1080p",
-          "goodFor": ["E-sports titles at high refresh rate", "Competitive FPS (CS2, Valorant)", "Fast app switching", "Light developer workloads (VSCode, Docker small containers)"],
+          "goodFor": ["E-sports titles at high refresh rate", "Competitive FPS (CS2, Valorant, Apex)", "Fast app switching", "Light developer workloads (VSCode, Docker small containers)"],
           "struggles": ["1440p AAA gaming", "sustained multi-hour renders", "large VM environments"],
-          "upgradeNote": "Pair with a 144 Hz 1080p monitor to fully exploit the frame rate headroom."
+          "upgradeNote": "Upgrading to AM5 with DDR5 and an RTX 5060 Ti unlocks confident 1440p gaming."
         }
       }
     }
@@ -84,58 +84,58 @@
 
   "budget": {
     "label": "Budget Build",
-    "priceRange": [451, 700],
+    "priceRange": [700, 1100],
     "useCases": {
       "gaming": {
         "parts": [
-          { "type": "CPU",     "name": "AMD Ryzen 5 7600",           "price": 150, "retailer": "Scan",       "affiliateUrl": "#", "why": "Zen 4 architecture, PCIe 5.0 support, strong gaming IPC on AM5." },
-          { "type": "Cooler",  "name": "DeepCool AK400",             "price": 25,  "retailer": "Amazon UK",  "affiliateUrl": "#", "why": "Excellent single-tower cooler; keeps Ryzen 7000 65 W parts cool and quiet." },
-          { "type": "Motherboard", "name": "MSI PRO A620M-E",        "price": 80,  "retailer": "Overclockers UK", "affiliateUrl": "#", "why": "Budget A620 board; locks in AM5 platform for future upgrades." },
-          { "type": "RAM",     "name": "Corsair Vengeance 32 GB DDR5-5600 (2×16 GB)", "price": 75, "retailer": "Amazon UK", "affiliateUrl": "#", "why": "DDR5-5600 is the AM5 sweet spot; 32 GB future-proofs for next-gen titles." },
-          { "type": "GPU",     "name": "AMD Radeon RX 7600 XT",      "price": 200, "retailer": "Scan",       "affiliateUrl": "#", "why": "16 GB VRAM and RDNA 3 architecture; solid 1080p/entry 1440p performance." },
-          { "type": "Storage", "name": "Kingston NV3 1 TB NVMe PCIe 4.0", "price": 45, "retailer": "Amazon UK", "affiliateUrl": "#", "why": "Fast sequential reads accelerate shader compilation and level streaming." },
-          { "type": "PSU",     "name": "Corsair CV650 650 W 80+ Bronze", "price": 55, "retailer": "Scan",   "affiliateUrl": "#", "why": "Enough overhead for a future GPU upgrade to 200 W cards." },
-          { "type": "Case",    "name": "Fractal Design Pop Air",      "price": 60,  "retailer": "Amazon UK",  "affiliateUrl": "#", "why": "Top-tier stock airflow; three 120 mm fans included." }
+          { "type": "CPU",     "name": "AMD Ryzen 5 7600",                          "price": 154, "retailer": "Scan",            "affiliateUrl": "#", "why": "Zen 4 architecture, PCIe 5.0 support, strong gaming IPC on AM5 — the best budget gaming CPU." },
+          { "type": "Cooler",  "name": "DeepCool AK400",                            "price": 25,  "retailer": "Amazon UK",       "affiliateUrl": "#", "why": "Excellent single-tower cooler; keeps Ryzen 7000 65 W parts cool and quiet." },
+          { "type": "Motherboard", "name": "MSI PRO A620M-E",                      "price": 80,  "retailer": "Overclockers UK", "affiliateUrl": "#", "why": "Budget A620 board; locks in AM5 platform for future CPU upgrades." },
+          { "type": "RAM",     "name": "Corsair Vengeance 32 GB DDR5-5600 (2×16 GB)","price": 75,"retailer": "Amazon UK",       "affiliateUrl": "#", "why": "DDR5-5600 is the AM5 sweet spot; 32 GB future-proofs for next-gen titles." },
+          { "type": "GPU",     "name": "PNY GeForce RTX 5060 Ti 8 GB GDDR7",       "price": 345, "retailer": "Scan",            "affiliateUrl": "#", "why": "Blackwell architecture with 4608 CUDA cores and DLSS 4; excellent 1080p and capable 1440p gaming." },
+          { "type": "Storage", "name": "Kingston NV3 1 TB NVMe PCIe 4.0",          "price": 45,  "retailer": "Amazon UK",       "affiliateUrl": "#", "why": "Fast sequential reads accelerate shader compilation and level streaming." },
+          { "type": "PSU",     "name": "Corsair CV650 650 W 80+ Bronze",            "price": 55,  "retailer": "Scan",            "affiliateUrl": "#", "why": "Enough overhead for a future GPU upgrade to 200 W+ cards." },
+          { "type": "Case",    "name": "Fractal Design Pop Air",                    "price": 60,  "retailer": "Amazon UK",       "affiliateUrl": "#", "why": "Top-tier stock airflow; three 120 mm fans included." }
         ],
-        "total": 690,
+        "total": 839,
         "performance": {
           "resolution": "1080p / entry 1440p",
-          "goodFor": ["1080p Ultra in most AAA titles", "1440p Medium-High in less demanding games", "Cyberpunk 2077 (1080p High 60+ fps)", "Fortnite (1440p High 90+ fps)"],
-          "struggles": ["1440p Ultra consistently", "4K gaming", "ray tracing at 1440p"],
-          "upgradeNote": "Drop in an RX 7800 XT later for confident 1440p Ultra."
+          "goodFor": ["1080p Ultra in most AAA titles", "1440p Medium-High in demanding games", "Cyberpunk 2077 (1080p Ultra DLSS 4)", "Fortnite (1440p High 90+ fps)"],
+          "struggles": ["1440p Ultra consistently without DLSS", "4K gaming", "ray tracing at 1440p"],
+          "upgradeNote": "Drop in an RTX 5070 for confident 1440p Ultra across all titles."
         }
       },
       "office": {
         "parts": [
-          { "type": "CPU",     "name": "AMD Ryzen 5 7600",           "price": 150, "retailer": "Scan",       "affiliateUrl": "#", "why": "Integrated Radeon 740M graphics removes the need for a discrete GPU." },
-          { "type": "Cooler",  "name": "DeepCool AK400",             "price": 25,  "retailer": "Amazon UK",  "affiliateUrl": "#", "why": "Quiet under light workloads." },
-          { "type": "Motherboard", "name": "MSI PRO A620M-E",        "price": 80,  "retailer": "Overclockers UK", "affiliateUrl": "#", "why": "Has full DisplayPort and HDMI out from the APU." },
-          { "type": "RAM",     "name": "Corsair Vengeance 32 GB DDR5-5600 (2×16 GB)", "price": 75, "retailer": "Amazon UK", "affiliateUrl": "#", "why": "Fast RAM is shared with iGPU; 32 GB handles heavy browser sessions." },
-          { "type": "GPU",     "name": "AMD Radeon 740M (integrated)", "price": 0,  "retailer": "Integrated", "affiliateUrl": "#", "why": "Drives up to two 4K displays; zero additional power draw." },
-          { "type": "Storage", "name": "WD Blue SN580 1 TB NVMe",    "price": 55,  "retailer": "Amazon UK",  "affiliateUrl": "#", "why": "Reliable everyday drive; fast enough for all office apps." },
-          { "type": "PSU",     "name": "Corsair CV450 450 W 80+ Bronze", "price": 40, "retailer": "Scan",   "affiliateUrl": "#", "why": "CPU-only system draws under 150 W total." },
-          { "type": "Case",    "name": "Fractal Design Core 1000",   "price": 35,  "retailer": "Amazon UK",  "affiliateUrl": "#", "why": "Compact and quiet; suits a tidy desk setup." }
+          { "type": "CPU",     "name": "AMD Ryzen 5 7600",                          "price": 154, "retailer": "Scan",            "affiliateUrl": "#", "why": "Integrated Radeon 740M graphics removes the need for a discrete GPU; handles dual 4K monitors." },
+          { "type": "Cooler",  "name": "DeepCool AK400",                            "price": 25,  "retailer": "Amazon UK",       "affiliateUrl": "#", "why": "Quiet under light workloads; good upgrade path." },
+          { "type": "Motherboard", "name": "MSI PRO A620M-E",                      "price": 80,  "retailer": "Overclockers UK", "affiliateUrl": "#", "why": "Full DisplayPort and HDMI output from the Radeon 740M iGPU." },
+          { "type": "RAM",     "name": "Corsair Vengeance 32 GB DDR5-5600 (2×16 GB)","price": 75,"retailer": "Amazon UK",       "affiliateUrl": "#", "why": "Fast RAM shared with iGPU; 32 GB handles heavy browser sessions and multiple apps simultaneously." },
+          { "type": "GPU",     "name": "AMD Radeon 740M (integrated)",              "price": 0,   "retailer": "Integrated",      "affiliateUrl": "#", "why": "Drives up to two 4K displays; zero additional power draw or cost." },
+          { "type": "Storage", "name": "WD Blue SN580 1 TB NVMe",                  "price": 55,  "retailer": "Amazon UK",       "affiliateUrl": "#", "why": "Reliable everyday drive; fast enough for all office apps." },
+          { "type": "PSU",     "name": "Corsair CV450 450 W 80+ Bronze",            "price": 40,  "retailer": "Scan",            "affiliateUrl": "#", "why": "CPU-only system draws under 150 W total." },
+          { "type": "Case",    "name": "Fractal Design Core 1000",                  "price": 35,  "retailer": "Amazon UK",       "affiliateUrl": "#", "why": "Compact and quiet; suits a tidy desk setup." }
         ],
-        "total": 460,
+        "total": 464,
         "performance": {
-          "resolution": "Dual 1440p",
+          "resolution": "Dual 4K",
           "goodFor": ["Microsoft 365 / Office", "Teams / Zoom 1080p calls", "Chrome with 30+ tabs", "Light Adobe Lightroom edits"],
           "struggles": ["GPU-accelerated video exports", "gaming beyond casual titles", "3D design software"],
-          "upgradeNote": "Add an RX 7600 XT for a capable dual-purpose office / gaming machine."
+          "upgradeNote": "Add an RTX 5060 Ti for a capable dual-purpose office and gaming machine."
         }
       },
       "creation": {
         "parts": [
-          { "type": "CPU",     "name": "AMD Ryzen 5 7600X",          "price": 170, "retailer": "Amazon UK",  "affiliateUrl": "#", "why": "Higher boost clocks benefit single-threaded export tasks in Adobe suite." },
-          { "type": "Cooler",  "name": "DeepCool AK620",             "price": 40,  "retailer": "Amazon UK",  "affiliateUrl": "#", "why": "Dual-tower design handles the 105 W TDP of the 7600X under sustained load." },
-          { "type": "Motherboard", "name": "MSI PRO A620M-E",        "price": 80,  "retailer": "Overclockers UK", "affiliateUrl": "#", "why": "Functional A620 board; enough PCIe lanes for GPU and fast NVMe." },
-          { "type": "RAM",     "name": "Corsair Vengeance 32 GB DDR5-5600 (2×16 GB)", "price": 75, "retailer": "Amazon UK", "affiliateUrl": "#", "why": "32 GB is the minimum comfortable headroom for Premiere Pro 4K projects." },
-          { "type": "GPU",     "name": "AMD Radeon RX 7600 XT",      "price": 200, "retailer": "Scan",       "affiliateUrl": "#", "why": "16 GB VRAM keeps 4K timelines in GPU memory in DaVinci Resolve." },
-          { "type": "Storage", "name": "WD Blue SN580 2 TB NVMe",    "price": 85,  "retailer": "Amazon UK",  "affiliateUrl": "#", "why": "2 TB of fast scratch space accommodates several active video projects." },
-          { "type": "PSU",     "name": "Corsair CV650 650 W 80+ Bronze", "price": 55, "retailer": "Scan",   "affiliateUrl": "#", "why": "Stable under sustained CPU + GPU rendering load." },
-          { "type": "Case",    "name": "BitFenix Nova Mesh TG",       "price": 55,  "retailer": "Amazon UK",  "affiliateUrl": "#", "why": "Tempered glass and mesh front; good thermal performance." }
+          { "type": "CPU",     "name": "AMD Ryzen 5 7600X",                         "price": 170, "retailer": "Amazon UK",       "affiliateUrl": "#", "why": "Higher boost clocks benefit single-threaded export tasks in the Adobe suite." },
+          { "type": "Cooler",  "name": "DeepCool AK620",                            "price": 40,  "retailer": "Amazon UK",       "affiliateUrl": "#", "why": "Dual-tower design handles the 105 W TDP of the 7600X under sustained load." },
+          { "type": "Motherboard", "name": "MSI PRO A620M-E",                      "price": 80,  "retailer": "Overclockers UK", "affiliateUrl": "#", "why": "Functional A620 board; enough PCIe lanes for GPU and fast NVMe." },
+          { "type": "RAM",     "name": "Corsair Vengeance 32 GB DDR5-5600 (2×16 GB)","price": 75,"retailer": "Amazon UK",       "affiliateUrl": "#", "why": "32 GB is the minimum comfortable headroom for Premiere Pro 4K projects." },
+          { "type": "GPU",     "name": "ZOTAC GeForce RTX 5060 Ti 16 GB GDDR7",    "price": 468, "retailer": "Scan",            "affiliateUrl": "#", "why": "16 GB GDDR7 keeps 4K timelines in GPU memory in DaVinci Resolve; NVENC AV1 accelerates exports." },
+          { "type": "Storage", "name": "WD Blue SN580 2 TB NVMe",                  "price": 85,  "retailer": "Amazon UK",       "affiliateUrl": "#", "why": "2 TB of fast scratch space accommodates several active video projects." },
+          { "type": "PSU",     "name": "Corsair CV650 650 W 80+ Bronze",            "price": 55,  "retailer": "Scan",            "affiliateUrl": "#", "why": "Stable under sustained CPU + GPU rendering load." },
+          { "type": "Case",    "name": "BitFenix Nova Mesh TG",                     "price": 55,  "retailer": "Amazon UK",       "affiliateUrl": "#", "why": "Tempered glass and mesh front; good thermal performance." }
         ],
-        "total": 760,
+        "total": 1028,
         "performance": {
           "resolution": "1080p–4K export",
           "goodFor": ["4K video editing (DaVinci Resolve free tier)", "Photoshop / Lightroom Classic", "Motion graphics (After Effects)", "Streaming 1080p60 while gaming"],
@@ -145,21 +145,21 @@
       },
       "performance": {
         "parts": [
-          { "type": "CPU",     "name": "AMD Ryzen 5 7600",           "price": 150, "retailer": "Scan",       "affiliateUrl": "#", "why": "AM5 platform longevity; fast IPC for responsive workloads." },
-          { "type": "Cooler",  "name": "DeepCool AK400",             "price": 25,  "retailer": "Amazon UK",  "affiliateUrl": "#", "why": "Silent operation at 65 W with plenty of thermal headroom." },
-          { "type": "Motherboard", "name": "Gigabyte B650M DS3H",    "price": 100, "retailer": "Overclockers UK", "affiliateUrl": "#", "why": "B650 unlocks PCIe 5.0 GPU slot and NVMe for faster storage." },
-          { "type": "RAM",     "name": "G.Skill Trident Z5 32 GB DDR5-6000 (2×16 GB)", "price": 90, "retailer": "Scan", "affiliateUrl": "#", "why": "DDR5-6000 at 1:1 FCLK ratio maximises Ryzen 7000 memory bandwidth." },
-          { "type": "GPU",     "name": "NVIDIA GeForce RTX 4060",    "price": 270, "retailer": "Scan",       "affiliateUrl": "#", "why": "DLSS 3 frame generation boosts effective fps in supported titles." },
-          { "type": "Storage", "name": "Seagate FireCuda 530 1 TB PCIe 4.0", "price": 80, "retailer": "Amazon UK", "affiliateUrl": "#", "why": "High endurance TLC NVMe; fast random IO for compiled workloads." },
-          { "type": "PSU",     "name": "Corsair RM650e 650 W 80+ Gold", "price": 90, "retailer": "Scan",   "affiliateUrl": "#", "why": "Gold efficiency and fully modular cables; lower operating temps." },
-          { "type": "Case",    "name": "Fractal Design Pop Air",      "price": 60,  "retailer": "Amazon UK",  "affiliateUrl": "#", "why": "Reliable stock cooling; no afterthought thermals." }
+          { "type": "CPU",     "name": "AMD Ryzen 5 7600",                          "price": 154, "retailer": "Scan",            "affiliateUrl": "#", "why": "AM5 platform longevity; fast IPC for responsive competitive and developer workloads." },
+          { "type": "Cooler",  "name": "DeepCool AK400",                            "price": 25,  "retailer": "Amazon UK",       "affiliateUrl": "#", "why": "Silent operation at 65 W with plenty of thermal headroom." },
+          { "type": "Motherboard", "name": "Gigabyte B650M DS3H",                  "price": 100, "retailer": "Overclockers UK", "affiliateUrl": "#", "why": "B650 unlocks PCIe 5.0 GPU slot and fast NVMe for maximum bandwidth." },
+          { "type": "RAM",     "name": "G.Skill Trident Z5 32 GB DDR5-6000 (2×16 GB)","price": 90,"retailer": "Scan",          "affiliateUrl": "#", "why": "DDR5-6000 at 1:1 FCLK ratio maximises Ryzen 7000 memory bandwidth." },
+          { "type": "GPU",     "name": "ZOTAC GeForce RTX 5060 Ti 16 GB GDDR7",    "price": 468, "retailer": "Scan",            "affiliateUrl": "#", "why": "DLSS 4 Multi Frame Generation and 16 GB GDDR7 give headroom for 1440p and light CUDA workloads." },
+          { "type": "Storage", "name": "Seagate FireCuda 530 1 TB PCIe 4.0",       "price": 80,  "retailer": "Amazon UK",       "affiliateUrl": "#", "why": "High endurance TLC NVMe; fast random IO for compiled workloads." },
+          { "type": "PSU",     "name": "Corsair RM650e 650 W 80+ Gold",             "price": 90,  "retailer": "Scan",            "affiliateUrl": "#", "why": "Gold efficiency and fully modular cables; lower operating temps." },
+          { "type": "Case",    "name": "Fractal Design Pop Air",                    "price": 60,  "retailer": "Amazon UK",       "affiliateUrl": "#", "why": "Reliable stock cooling; no afterthought thermals." }
         ],
-        "total": 865,
+        "total": 1067,
         "performance": {
           "resolution": "1080p high refresh / entry 1440p",
           "goodFor": ["E-sports at 240+ fps (CS2, Valorant, Apex)", "DLSS-boosted AAA at 1440p", "Developer builds (VSCode, Node, Docker)", "Light ML inference (CUDA)"],
           "struggles": ["Native 4K rasterisation", "Blender Cycles on large scenes", "Heavy multi-GPU ML training"],
-          "upgradeNote": "RTX 4060 Ti or RX 7800 XT swap gives 1440p Ultra confidence."
+          "upgradeNote": "RTX 5070 swap gives full 1440p Ultra confidence and significant DLSS 4 headroom."
         }
       }
     }
@@ -167,39 +167,39 @@
 
   "mid": {
     "label": "Mid-Range Build",
-    "priceRange": [701, 1100],
+    "priceRange": [1101, 1600],
     "useCases": {
       "gaming": {
         "parts": [
-          { "type": "CPU",     "name": "AMD Ryzen 5 9600X",          "price": 220, "retailer": "Scan",       "affiliateUrl": "#", "why": "Zen 5 IPC uplift delivers the best gaming performance per core in this bracket." },
-          { "type": "Cooler",  "name": "be quiet! Pure Rock 2",      "price": 35,  "retailer": "Amazon UK",  "affiliateUrl": "#", "why": "Handles 65 W easily; near-silent under typical gaming loads." },
-          { "type": "Motherboard", "name": "Gigabyte B850M DS3H",    "price": 110, "retailer": "Overclockers UK", "affiliateUrl": "#", "why": "B850 provides PCIe 5.0 GPU and M.2; solid VRM for Zen 5." },
-          { "type": "RAM",     "name": "G.Skill Ripjaws S5 32 GB DDR5-6000 (2×16 GB)", "price": 90, "retailer": "Scan", "affiliateUrl": "#", "why": "CL30 DDR5-6000 sits at the 1:1 FCLK sweet spot for AM5." },
-          { "type": "GPU",     "name": "AMD Radeon RX 7800 XT",      "price": 320, "retailer": "Overclockers UK", "affiliateUrl": "#", "why": "16 GB GDDR6 and strong rasterisation; best price-per-frame at 1440p." },
-          { "type": "Storage", "name": "WD Black SN850X 1 TB PCIe 4.0", "price": 90, "retailer": "Amazon UK", "affiliateUrl": "#", "why": "High sustained throughput eliminates micro-stutter in open-world titles." },
-          { "type": "PSU",     "name": "Corsair RM750e 750 W 80+ Gold", "price": 95, "retailer": "Scan",   "affiliateUrl": "#", "why": "Gold efficiency; fully modular; headroom for an RTX 5000 series upgrade." },
-          { "type": "Case",    "name": "Fractal Design North TG",    "price": 110, "retailer": "Amazon UK",  "affiliateUrl": "#", "why": "Excellent airflow; premium build quality; wood-panel aesthetic." }
+          { "type": "CPU",     "name": "AMD Ryzen 5 9600X",                         "price": 179, "retailer": "Scan",            "affiliateUrl": "#", "why": "Zen 5 IPC uplift delivers the best gaming performance per core in this bracket." },
+          { "type": "Cooler",  "name": "be quiet! Pure Rock 2",                     "price": 35,  "retailer": "Amazon UK",       "affiliateUrl": "#", "why": "Handles 65 W easily; near-silent under typical gaming loads." },
+          { "type": "Motherboard", "name": "Gigabyte B850M DS3H",                  "price": 110, "retailer": "Overclockers UK", "affiliateUrl": "#", "why": "B850 provides PCIe 5.0 GPU and M.2; solid VRM for Zen 5." },
+          { "type": "RAM",     "name": "G.Skill Ripjaws S5 32 GB DDR5-6000 (2×16 GB)","price": 90,"retailer": "Scan",           "affiliateUrl": "#", "why": "CL30 DDR5-6000 sits at the 1:1 FCLK sweet spot for AM5." },
+          { "type": "GPU",     "name": "ZOTAC GeForce RTX 5070 Twin Edge OC 12 GB GDDR7","price": 550,"retailer": "Scan",       "affiliateUrl": "#", "why": "Blackwell 12 GB GDDR7 with DLSS 4 Multi Frame Generation; confident 1440p Ultra and capable 4K." },
+          { "type": "Storage", "name": "WD Black SN850X 1 TB PCIe 4.0",            "price": 90,  "retailer": "Amazon UK",       "affiliateUrl": "#", "why": "High sustained throughput eliminates micro-stutter in open-world titles." },
+          { "type": "PSU",     "name": "Corsair RM750e 750 W 80+ Gold",             "price": 95,  "retailer": "Scan",            "affiliateUrl": "#", "why": "Gold efficiency; fully modular; headroom for a future RTX 5080 upgrade." },
+          { "type": "Case",    "name": "Fractal Design North TG",                   "price": 110, "retailer": "Amazon UK",       "affiliateUrl": "#", "why": "Excellent airflow; premium build quality; wood-panel aesthetic." }
         ],
-        "total": 1070,
+        "total": 1259,
         "performance": {
           "resolution": "1440p",
-          "goodFor": ["1440p Ultra in most AAA titles", "Cyberpunk 2077 (1440p High 60+ fps)", "Forza Horizon 5 (1440p Ultra 90+ fps)", "VR (Meta Quest 3 Link)"],
-          "struggles": ["4K native Ultra settings", "ray tracing at 4K", "heavy compute tasks"],
-          "upgradeNote": "RX 7900 GRE upgrade later pushes comfortable 4K performance."
+          "goodFor": ["1440p Ultra in most AAA titles", "Cyberpunk 2077 (1440p Ultra DLSS Quality)", "Forza Horizon 5 (1440p Ultra 90+ fps)", "VR (Meta Quest 3 Link)"],
+          "struggles": ["4K native Ultra settings", "ray tracing at 4K without DLSS", "heavy compute tasks"],
+          "upgradeNote": "RTX 5080 upgrade provides confident 4K Ultra performance and higher refresh rate headroom."
         }
       },
       "office": {
         "parts": [
-          { "type": "CPU",     "name": "AMD Ryzen 7 7700",           "price": 210, "retailer": "Scan",       "affiliateUrl": "#", "why": "Eight cores handle large spreadsheets and multi-window workflows effortlessly." },
-          { "type": "Cooler",  "name": "be quiet! Pure Rock 2",      "price": 35,  "retailer": "Amazon UK",  "affiliateUrl": "#", "why": "Silent operation in quiet office environments." },
-          { "type": "Motherboard", "name": "MSI MAG B650 Tomahawk WiFi", "price": 160, "retailer": "Overclockers UK", "affiliateUrl": "#", "why": "Built-in Wi-Fi 6E and 2.5 GbE; convenient for a desk without cable runs." },
-          { "type": "RAM",     "name": "Corsair Vengeance 32 GB DDR5-5600 (2×16 GB)", "price": 75, "retailer": "Amazon UK", "affiliateUrl": "#", "why": "32 GB comfortably handles 50+ browser tabs, email, and Office simultaneously." },
-          { "type": "GPU",     "name": "AMD Radeon RX 6600 XT",      "price": 140, "retailer": "Overclockers UK", "affiliateUrl": "#", "why": "Runs four monitors at 1440p without fan noise at 2D desktop workloads." },
-          { "type": "Storage", "name": "Samsung 990 EVO 2 TB NVMe",  "price": 120, "retailer": "Amazon UK",  "affiliateUrl": "#", "why": "2 TB avoids constant housekeeping; fast for large PST and database files." },
-          { "type": "PSU",     "name": "Corsair RM650e 650 W 80+ Gold", "price": 90, "retailer": "Scan",   "affiliateUrl": "#", "why": "Efficient under light loads; quiet fan curve." },
-          { "type": "Case",    "name": "Fractal Design Define 7 Compact", "price": 100, "retailer": "Amazon UK", "affiliateUrl": "#", "why": "Sound-dampened panels make this one of the quietest cases available." }
+          { "type": "CPU",     "name": "AMD Ryzen 7 7700",                          "price": 196, "retailer": "Scan",            "affiliateUrl": "#", "why": "Eight cores handle large spreadsheets and multi-window workflows effortlessly." },
+          { "type": "Cooler",  "name": "be quiet! Pure Rock 2",                     "price": 35,  "retailer": "Amazon UK",       "affiliateUrl": "#", "why": "Silent operation in quiet office environments." },
+          { "type": "Motherboard", "name": "MSI MAG B650 Tomahawk WiFi",           "price": 160, "retailer": "Overclockers UK", "affiliateUrl": "#", "why": "Built-in Wi-Fi 6E and 2.5 GbE; convenient for a desk without cable runs." },
+          { "type": "RAM",     "name": "Corsair Vengeance 32 GB DDR5-5600 (2×16 GB)","price": 75,"retailer": "Amazon UK",       "affiliateUrl": "#", "why": "32 GB comfortably handles 50+ browser tabs, email, and Office simultaneously." },
+          { "type": "GPU",     "name": "ZOTAC GeForce RTX 5060 8 GB GDDR7",        "price": 270, "retailer": "Scan",            "affiliateUrl": "#", "why": "Drives up to four monitors at 1440p; whisper quiet at 2D desktop workloads." },
+          { "type": "Storage", "name": "Samsung 990 EVO 2 TB NVMe",                "price": 120, "retailer": "Amazon UK",       "affiliateUrl": "#", "why": "2 TB avoids constant housekeeping; fast for large PST and database files." },
+          { "type": "PSU",     "name": "Corsair RM650e 650 W 80+ Gold",             "price": 90,  "retailer": "Scan",            "affiliateUrl": "#", "why": "Efficient under light loads; quiet fan curve." },
+          { "type": "Case",    "name": "Fractal Design Define 7 Compact",           "price": 100, "retailer": "Amazon UK",       "affiliateUrl": "#", "why": "Sound-dampened panels make this one of the quietest cases available." }
         ],
-        "total": 930,
+        "total": 1046,
         "performance": {
           "resolution": "Quad 1440p",
           "goodFor": ["Heavy multitasking (100+ tabs)", "SQL / large Excel models", "PowerPoint with 4K assets", "Video conferencing with virtual backgrounds"],
@@ -209,40 +209,40 @@
       },
       "creation": {
         "parts": [
-          { "type": "CPU",     "name": "AMD Ryzen 7 7700X",          "price": 230, "retailer": "Scan",       "affiliateUrl": "#", "why": "Eight high-IPC Zen 4 cores; excellent in multi-threaded export queues." },
-          { "type": "Cooler",  "name": "Arctic Freezer 34 eSports DUO", "price": 40, "retailer": "Amazon UK", "affiliateUrl": "#", "why": "Dual-tower handles 105 W sustained; affordable and effective." },
-          { "type": "Motherboard", "name": "MSI MAG B650 Tomahawk WiFi", "price": 160, "retailer": "Overclockers UK", "affiliateUrl": "#", "why": "Two M.2 slots; good VRM for sustained multi-core workloads." },
-          { "type": "RAM",     "name": "G.Skill Ripjaws S5 64 GB DDR5-6000 (2×32 GB)", "price": 155, "retailer": "Scan", "affiliateUrl": "#", "why": "64 GB prevents RAM bottleneck in After Effects RAM preview caching." },
-          { "type": "GPU",     "name": "NVIDIA GeForce RTX 4070",    "price": 470, "retailer": "Overclockers UK", "affiliateUrl": "#", "why": "12 GB VRAM and NVENC AV1 make this the encoding and editing GPU sweet spot." },
-          { "type": "Storage", "name": "Samsung 990 Pro 2 TB PCIe 4.0", "price": 150, "retailer": "Amazon UK", "affiliateUrl": "#", "why": "High sustained write speed sustains 4K video ingest without frame drops." },
-          { "type": "PSU",     "name": "Corsair RM750e 750 W 80+ Gold", "price": 95, "retailer": "Scan",   "affiliateUrl": "#", "why": "RTX 4070 + Ryzen 7 peak draw is around 600 W; 750 W gives safe margin." },
-          { "type": "Case",    "name": "Fractal Design Pop XL Air",   "price": 110, "retailer": "Amazon UK",  "affiliateUrl": "#", "why": "Full-tower airflow and cable management for clean multi-drive setups." }
+          { "type": "CPU",     "name": "AMD Ryzen 7 7700X",                         "price": 230, "retailer": "Scan",            "affiliateUrl": "#", "why": "Eight high-IPC Zen 4 cores; excellent in multi-threaded export queues." },
+          { "type": "Cooler",  "name": "Arctic Freezer 34 eSports DUO",             "price": 40,  "retailer": "Amazon UK",       "affiliateUrl": "#", "why": "Dual-tower handles 105 W sustained; affordable and effective." },
+          { "type": "Motherboard", "name": "MSI MAG B650 Tomahawk WiFi",           "price": 160, "retailer": "Overclockers UK", "affiliateUrl": "#", "why": "Two M.2 slots; good VRM for sustained multi-core workloads." },
+          { "type": "RAM",     "name": "G.Skill Ripjaws S5 64 GB DDR5-6000 (2×32 GB)","price": 155,"retailer": "Scan",          "affiliateUrl": "#", "why": "64 GB prevents RAM bottleneck in After Effects RAM preview caching." },
+          { "type": "GPU",     "name": "ZOTAC GeForce RTX 5070 Twin Edge OC 12 GB GDDR7","price": 550,"retailer": "Scan",       "affiliateUrl": "#", "why": "12 GB GDDR7 and NVENC AV1 make this the encoding and editing GPU sweet spot in 2026." },
+          { "type": "Storage", "name": "Samsung 990 Pro 2 TB PCIe 4.0",            "price": 150, "retailer": "Amazon UK",       "affiliateUrl": "#", "why": "High sustained write speed sustains 4K video ingest without frame drops." },
+          { "type": "PSU",     "name": "Corsair RM750e 750 W 80+ Gold",             "price": 95,  "retailer": "Scan",            "affiliateUrl": "#", "why": "RTX 5070 + Ryzen 7 peak draw is around 500 W; 750 W gives safe margin." },
+          { "type": "Case",    "name": "Fractal Design Pop XL Air",                 "price": 110, "retailer": "Amazon UK",       "affiliateUrl": "#", "why": "Full-tower airflow and cable management for clean multi-drive setups." }
         ],
-        "total": 1410,
+        "total": 1490,
         "performance": {
           "resolution": "4K export",
           "goodFor": ["4K timeline editing (Premiere Pro, Resolve Studio)", "3D rendering (Blender)", "Motion graphics (After Effects)", "Music production (DAW with 100+ tracks)"],
           "struggles": ["8K realtime playback", "Stable Diffusion training", "Octane GPU render at 4K unbiased"],
-          "upgradeNote": "RTX 4070 Ti Super drops render time by ~30% for heavy Blender projects."
+          "upgradeNote": "RTX 5080 drops render time by ~30% for heavy Blender projects and adds 4K colour grading headroom."
         }
       },
       "performance": {
         "parts": [
-          { "type": "CPU",     "name": "AMD Ryzen 5 9600X",          "price": 220, "retailer": "Scan",       "affiliateUrl": "#", "why": "Fastest single-thread performance in the mid bracket; low latency for real-time tasks." },
-          { "type": "Cooler",  "name": "Noctua NH-U12S redux",       "price": 50,  "retailer": "Amazon UK",  "affiliateUrl": "#", "why": "Premium single-tower; near-silent even under full-core load." },
-          { "type": "Motherboard", "name": "Gigabyte X870 Eagle WiFi", "price": 180, "retailer": "Scan",   "affiliateUrl": "#", "why": "X870 unlocks USB 4, PCIe 5.0 storage, and better VRM for overclocking." },
-          { "type": "RAM",     "name": "G.Skill Trident Z5 32 GB DDR5-6400 (2×16 GB)", "price": 100, "retailer": "Scan", "affiliateUrl": "#", "why": "Tight timings at 6400 maximise Zen 5 memory bandwidth." },
-          { "type": "GPU",     "name": "NVIDIA GeForce RTX 4070",    "price": 470, "retailer": "Overclockers UK", "affiliateUrl": "#", "why": "DLSS 3 and AV1 encode; excellent ray tracing performance per watt." },
-          { "type": "Storage", "name": "WD Black SN850X 2 TB PCIe 4.0", "price": 150, "retailer": "Amazon UK", "affiliateUrl": "#", "why": "2 TB high-endurance drive for OS, apps, and fast project files." },
-          { "type": "PSU",     "name": "Corsair RM750x 750 W 80+ Gold", "price": 110, "retailer": "Scan",  "affiliateUrl": "#", "why": "Ten-year warranty and zero-RPM mode; reference-grade PSU." },
-          { "type": "Case",    "name": "Lian Li LANCOOL 216",         "price": 90,  "retailer": "Amazon UK",  "affiliateUrl": "#", "why": "Two 160 mm front fans included; among the best stock airflow cases." }
+          { "type": "CPU",     "name": "AMD Ryzen 5 9600X",                         "price": 179, "retailer": "Scan",            "affiliateUrl": "#", "why": "Fastest single-thread performance in the mid bracket; low latency for real-time tasks." },
+          { "type": "Cooler",  "name": "Noctua NH-U12S redux",                      "price": 50,  "retailer": "Amazon UK",       "affiliateUrl": "#", "why": "Premium single-tower; near-silent even under full-core load." },
+          { "type": "Motherboard", "name": "Gigabyte X870 Eagle WiFi",              "price": 180, "retailer": "Scan",            "affiliateUrl": "#", "why": "X870 unlocks USB 4, PCIe 5.0 storage, and better VRM for overclocking." },
+          { "type": "RAM",     "name": "G.Skill Trident Z5 32 GB DDR5-6400 (2×16 GB)","price": 100,"retailer": "Scan",          "affiliateUrl": "#", "why": "Tight timings at 6400 maximise Zen 5 memory bandwidth." },
+          { "type": "GPU",     "name": "ZOTAC GeForce RTX 5070 Twin Edge OC 12 GB GDDR7","price": 550,"retailer": "Scan",       "affiliateUrl": "#", "why": "DLSS 4 and NVENC AV1; excellent ray tracing performance per watt." },
+          { "type": "Storage", "name": "WD Black SN850X 2 TB PCIe 4.0",            "price": 150, "retailer": "Amazon UK",       "affiliateUrl": "#", "why": "2 TB high-endurance drive for OS, apps, and fast project files." },
+          { "type": "PSU",     "name": "Corsair RM750x 750 W 80+ Gold",             "price": 110, "retailer": "Scan",            "affiliateUrl": "#", "why": "Ten-year warranty and zero-RPM mode; reference-grade PSU." },
+          { "type": "Case",    "name": "Lian Li LANCOOL 216",                       "price": 90,  "retailer": "Amazon UK",       "affiliateUrl": "#", "why": "Two 160 mm front fans included; among the best stock airflow cases." }
         ],
-        "total": 1370,
+        "total": 1409,
         "performance": {
           "resolution": "1440p high refresh / entry 4K",
           "goodFor": ["1440p 165 Hz AAA gaming", "Competitive titles at 360 Hz 1080p", "CUDA-accelerated workloads", "Fast compile times (Rust, C++)"],
           "struggles": ["4K Native Ultra in demanding titles", "Large ML dataset processing", "Complex fluid simulations"],
-          "upgradeNote": "RTX 4070 Super swap adds 10–15% performance for 4K confidence."
+          "upgradeNote": "RTX 5080 swap adds ~40% performance for confident 4K gaming."
         }
       }
     }
@@ -250,39 +250,39 @@
 
   "high": {
     "label": "High-End Build",
-    "priceRange": [1101, 1800],
+    "priceRange": [1601, 2800],
     "useCases": {
       "gaming": {
         "parts": [
-          { "type": "CPU",     "name": "AMD Ryzen 7 9700X",          "price": 320, "retailer": "Scan",       "affiliateUrl": "#", "why": "Eight Zen 5 cores with the highest gaming IPC available on AM5 today." },
-          { "type": "Cooler",  "name": "Noctua NH-D15 chromax.black", "price": 90, "retailer": "Amazon UK",  "affiliateUrl": "#", "why": "Best air cooler available; silent even under sustained multi-core boost." },
-          { "type": "Motherboard", "name": "MSI MAG X870E Tomahawk WiFi", "price": 260, "retailer": "Overclockers UK", "affiliateUrl": "#", "why": "X870E provides robust VRM and USB4 front-panel for Ryzen 9000 headroom." },
-          { "type": "RAM",     "name": "G.Skill Trident Z5 Neo 32 GB DDR5-6000 (2×16 GB)", "price": 110, "retailer": "Scan", "affiliateUrl": "#", "why": "AMD EXPO-optimised kit; CL30 at 6000 MT/s is the AM5 sweet spot." },
-          { "type": "GPU",     "name": "NVIDIA GeForce RTX 4080 Super", "price": 900, "retailer": "Scan",   "affiliateUrl": "#", "why": "16 GB GDDR6X; best rasterisation and ray tracing below RTX 5090 tier." },
-          { "type": "Storage", "name": "Samsung 990 Pro 2 TB PCIe 4.0", "price": 150, "retailer": "Amazon UK", "affiliateUrl": "#", "why": "Consistent high-speed random IO; critical for open-world asset streaming." },
-          { "type": "PSU",     "name": "Corsair HX1000 1000 W 80+ Platinum", "price": 170, "retailer": "Scan", "affiliateUrl": "#", "why": "RTX 4080 Super peaks at ~320 W; 1000 W covers future flagship GPUs." },
-          { "type": "Case",    "name": "Lian Li O11 Dynamic EVO",    "price": 140, "retailer": "Amazon UK",  "affiliateUrl": "#", "why": "Dual-chamber design and dual-radiator support for potential AIO upgrade." }
+          { "type": "CPU",     "name": "AMD Ryzen 7 9700X",                         "price": 246, "retailer": "Scan",            "affiliateUrl": "#", "why": "Eight Zen 5 cores with the highest gaming IPC available on AM5 today." },
+          { "type": "Cooler",  "name": "Noctua NH-D15 chromax.black",               "price": 90,  "retailer": "Amazon UK",       "affiliateUrl": "#", "why": "Best air cooler available; silent even under sustained multi-core boost." },
+          { "type": "Motherboard", "name": "MSI MAG X870E Tomahawk WiFi",          "price": 260, "retailer": "Overclockers UK", "affiliateUrl": "#", "why": "X870E provides robust VRM and USB4 front-panel for Ryzen 9000 headroom." },
+          { "type": "RAM",     "name": "G.Skill Trident Z5 Neo 32 GB DDR5-6000 (2×16 GB)","price": 110,"retailer": "Scan",      "affiliateUrl": "#", "why": "AMD EXPO-optimised kit; CL30 at 6000 MT/s is the AM5 sweet spot." },
+          { "type": "GPU",     "name": "PALIT GeForce RTX 5080 GAMING PRO 16 GB GDDR7","price": 1100,"retailer": "Scan",        "affiliateUrl": "#", "why": "16 GB GDDR7; best rasterisation and ray tracing below RTX 5090 tier — delivers 4K 60+ fps natively." },
+          { "type": "Storage", "name": "Samsung 990 Pro 2 TB PCIe 4.0",            "price": 150, "retailer": "Amazon UK",       "affiliateUrl": "#", "why": "Consistent high-speed random IO; critical for open-world asset streaming." },
+          { "type": "PSU",     "name": "Corsair HX1000 1000 W 80+ Platinum",        "price": 170, "retailer": "Scan",            "affiliateUrl": "#", "why": "RTX 5080 peaks at ~360 W; 1000 W covers future flagship GPUs." },
+          { "type": "Case",    "name": "Lian Li O11 Dynamic EVO",                   "price": 140, "retailer": "Amazon UK",       "affiliateUrl": "#", "why": "Dual-chamber design and dual-radiator support for potential AIO upgrade." }
         ],
-        "total": 2140,
+        "total": 2266,
         "performance": {
           "resolution": "4K / 1440p 240 Hz",
-          "goodFor": ["4K Ultra 60+ fps in most titles", "1440p 240 Hz competitive gaming", "Cyberpunk 2077 (4K RT Ultra, DLSS Quality)", "Flight Simulator 4K High"],
-          "struggles": ["4K 120 Hz native (RT Ultra)", "Profiling large shader caches at startup"],
-          "upgradeNote": "RTX 5080 launch will bring 4K 120 Hz RT Ultra within reach."
+          "goodFor": ["4K Ultra 60+ fps natively in most titles", "1440p 240 Hz competitive gaming", "Cyberpunk 2077 (4K RT Ultra, DLSS Quality)", "Flight Simulator 4K High"],
+          "struggles": ["4K 120 Hz native RT Ultra without DLSS"],
+          "upgradeNote": "RTX 5090 brings 4K 120 Hz RT Ultra within reach."
         }
       },
       "office": {
         "parts": [
-          { "type": "CPU",     "name": "AMD Ryzen 9 7900",           "price": 340, "retailer": "Scan",       "affiliateUrl": "#", "why": "Twelve cores and 65 W TDP; handles the heaviest professional spreadsheet and database workloads." },
-          { "type": "Cooler",  "name": "be quiet! Dark Rock 4",      "price": 65,  "retailer": "Amazon UK",  "affiliateUrl": "#", "why": "Near-inaudible; perfect for an executive desk environment." },
-          { "type": "Motherboard", "name": "ASUS ProArt B650-CREATOR", "price": 290, "retailer": "Overclockers UK", "affiliateUrl": "#", "why": "Two Thunderbolt 4 ports, 10 GbE LAN, and USB-C front panel for peripherals." },
-          { "type": "RAM",     "name": "Corsair Dominator Titanium 64 GB DDR5-6000 (2×32 GB)", "price": 220, "retailer": "Scan", "affiliateUrl": "#", "why": "64 GB enables large in-memory databases and simultaneous VMs." },
-          { "type": "GPU",     "name": "NVIDIA RTX 4000 Ada SFF",    "price": 750, "retailer": "Scan",       "affiliateUrl": "#", "why": "Professional certified driver support; ECC VRAM for financial applications." },
-          { "type": "Storage", "name": "Samsung 990 Pro 4 TB PCIe 4.0", "price": 280, "retailer": "Amazon UK", "affiliateUrl": "#", "why": "Single high-capacity NVMe avoids the complexity of RAID for document storage." },
-          { "type": "PSU",     "name": "Corsair RM850x 850 W 80+ Gold", "price": 120, "retailer": "Scan",  "affiliateUrl": "#", "why": "Modular and quiet; supports optional second NVMe and RAID expansion." },
-          { "type": "Case",    "name": "Fractal Design Define 7",    "price": 150, "retailer": "Amazon UK",  "affiliateUrl": "#", "why": "Heavily sound-dampened; front USB-C for peripheral convenience." }
+          { "type": "CPU",     "name": "AMD Ryzen 9 7900",                          "price": 281, "retailer": "Scan",            "affiliateUrl": "#", "why": "Twelve cores and 65 W TDP; handles the heaviest professional spreadsheet and database workloads." },
+          { "type": "Cooler",  "name": "be quiet! Dark Rock 4",                     "price": 65,  "retailer": "Amazon UK",       "affiliateUrl": "#", "why": "Near-inaudible; perfect for an executive desk environment." },
+          { "type": "Motherboard", "name": "ASUS ProArt B650-CREATOR",             "price": 290, "retailer": "Overclockers UK", "affiliateUrl": "#", "why": "Two Thunderbolt 4 ports, 10 GbE LAN, and USB-C front panel for peripherals." },
+          { "type": "RAM",     "name": "Corsair Dominator Titanium 64 GB DDR5-6000 (2×32 GB)","price": 220,"retailer": "Scan",   "affiliateUrl": "#", "why": "64 GB enables large in-memory databases and simultaneous VMs." },
+          { "type": "GPU",     "name": "Sapphire Radeon RX 9070 PULSE 16 GB GDDR6","price": 560, "retailer": "Scan",            "affiliateUrl": "#", "why": "RDNA 4 architecture; drives up to four 4K monitors with excellent driver stability for professional applications." },
+          { "type": "Storage", "name": "Samsung 990 Pro 4 TB PCIe 4.0",            "price": 280, "retailer": "Amazon UK",       "affiliateUrl": "#", "why": "Single high-capacity NVMe avoids the complexity of RAID for document storage." },
+          { "type": "PSU",     "name": "Corsair RM850x 850 W 80+ Gold",             "price": 120, "retailer": "Scan",            "affiliateUrl": "#", "why": "Modular and quiet; supports optional second NVMe and expansion." },
+          { "type": "Case",    "name": "Fractal Design Define 7",                   "price": 150, "retailer": "Amazon UK",       "affiliateUrl": "#", "why": "Heavily sound-dampened; front USB-C for peripheral convenience." }
         ],
-        "total": 2215,
+        "total": 1966,
         "performance": {
           "resolution": "Quad 4K",
           "goodFor": ["Bloomberg Terminal / multi-monitor trading", "Large Excel models (10 M+ rows)", "Simultaneous VMs", "4K video conferencing"],
@@ -292,16 +292,16 @@
       },
       "creation": {
         "parts": [
-          { "type": "CPU",     "name": "AMD Ryzen 9 9900X",          "price": 450, "retailer": "Scan",       "affiliateUrl": "#", "why": "Twelve Zen 5 cores; the fastest video export CPU below Threadripper." },
-          { "type": "Cooler",  "name": "Arctic Liquid Freezer III 360", "price": 110, "retailer": "Amazon UK", "affiliateUrl": "#", "why": "360 mm AIO handles 170 W sustained loads without throttling." },
-          { "type": "Motherboard", "name": "Gigabyte X870E Aorus Master", "price": 380, "retailer": "Scan", "affiliateUrl": "#", "why": "Four M.2 slots and robust 20+2 VRM for professional workloads." },
-          { "type": "RAM",     "name": "G.Skill Trident Z5 64 GB DDR5-6400 (2×32 GB)", "price": 200, "retailer": "Scan", "affiliateUrl": "#", "why": "64 GB is comfortable for 6K timeline editing and large After Effects comps." },
-          { "type": "GPU",     "name": "NVIDIA GeForce RTX 4080 Super", "price": 900, "retailer": "Scan",   "affiliateUrl": "#", "why": "16 GB VRAM handles 4K–8K GPU-accelerated colour grading in Resolve Studio." },
-          { "type": "Storage", "name": "Samsung 990 Pro 4 TB PCIe 4.0", "price": 280, "retailer": "Amazon UK", "affiliateUrl": "#", "why": "4 TB of fast NVMe keeps entire active projects on the fastest tier." },
-          { "type": "PSU",     "name": "Corsair HX1000 1000 W 80+ Platinum", "price": 170, "retailer": "Scan", "affiliateUrl": "#", "why": "Covers simultaneous 170 W CPU + 320 W GPU sustained rendering load." },
-          { "type": "Case",    "name": "Lian Li O11 Dynamic EVO XL", "price": 160, "retailer": "Amazon UK",  "affiliateUrl": "#", "why": "Full-tower volume for maximum drive bays, AIO, and cable tidiness." }
+          { "type": "CPU",     "name": "AMD Ryzen 9 9900X",                         "price": 330, "retailer": "Scan",            "affiliateUrl": "#", "why": "Twelve Zen 5 cores; the fastest video export CPU below Threadripper." },
+          { "type": "Cooler",  "name": "Arctic Liquid Freezer III 360",             "price": 110, "retailer": "Amazon UK",       "affiliateUrl": "#", "why": "360 mm AIO handles 170 W sustained loads without throttling." },
+          { "type": "Motherboard", "name": "Gigabyte X870E Aorus Master",           "price": 380, "retailer": "Scan",            "affiliateUrl": "#", "why": "Four M.2 slots and robust 20+2 VRM for professional workloads." },
+          { "type": "RAM",     "name": "G.Skill Trident Z5 64 GB DDR5-6400 (2×32 GB)","price": 200,"retailer": "Scan",          "affiliateUrl": "#", "why": "64 GB is comfortable for 6K timeline editing and large After Effects comps." },
+          { "type": "GPU",     "name": "PALIT GeForce RTX 5080 GAMING PRO 16 GB GDDR7","price": 1100,"retailer": "Scan",        "affiliateUrl": "#", "why": "16 GB GDDR7 handles 4K–8K GPU-accelerated colour grading in Resolve Studio." },
+          { "type": "Storage", "name": "Samsung 990 Pro 4 TB PCIe 4.0",            "price": 280, "retailer": "Amazon UK",       "affiliateUrl": "#", "why": "4 TB of fast NVMe keeps entire active projects on the fastest tier." },
+          { "type": "PSU",     "name": "Corsair HX1000 1000 W 80+ Platinum",        "price": 170, "retailer": "Scan",            "affiliateUrl": "#", "why": "Covers simultaneous 170 W CPU + 360 W GPU sustained rendering load." },
+          { "type": "Case",    "name": "Lian Li O11 Dynamic EVO XL",               "price": 160, "retailer": "Amazon UK",       "affiliateUrl": "#", "why": "Full-tower volume for maximum drive bays, AIO, and cable tidiness." }
         ],
-        "total": 2650,
+        "total": 2730,
         "performance": {
           "resolution": "6K / 8K export",
           "goodFor": ["8K Resolve Studio colour grading", "Real-time 6K playback", "Stable Diffusion inference (img2img)", "3D render farms (Blender Cycles + OptiX)"],
@@ -311,21 +311,21 @@
       },
       "performance": {
         "parts": [
-          { "type": "CPU",     "name": "AMD Ryzen 7 9700X",          "price": 320, "retailer": "Scan",       "affiliateUrl": "#", "why": "Best gaming IPC on AM5; no multi-core bottleneck at 4K." },
-          { "type": "Cooler",  "name": "Arctic Liquid Freezer III 280", "price": 90, "retailer": "Amazon UK", "affiliateUrl": "#", "why": "280 mm AIO keeps Ryzen 9700X cool and quiet under extended sessions." },
-          { "type": "Motherboard", "name": "ASUS ROG Strix X870-F WiFi", "price": 340, "retailer": "Scan",  "affiliateUrl": "#", "why": "X870 with PCIe 5.0 GPU and M.2; excellent onboard audio for streamers." },
-          { "type": "RAM",     "name": "G.Skill Trident Z5 32 GB DDR5-7200 (2×16 GB)", "price": 140, "retailer": "Scan", "affiliateUrl": "#", "why": "DDR5-7200 OC kit delivers measurable fps gains in memory-sensitive titles." },
-          { "type": "GPU",     "name": "NVIDIA GeForce RTX 4080 Super", "price": 900, "retailer": "Scan",   "affiliateUrl": "#", "why": "Flagship-adjacent rasterisation; well ahead of RTX 4070 Ti Super at 4K." },
-          { "type": "Storage", "name": "WD Black SN850X 2 TB PCIe 4.0", "price": 150, "retailer": "Amazon UK", "affiliateUrl": "#", "why": "High endurance 2 TB; sustains long game install libraries." },
-          { "type": "PSU",     "name": "Corsair HX1000 1000 W 80+ Platinum", "price": 170, "retailer": "Scan", "affiliateUrl": "#", "why": "Platinum efficiency reduces heat in high-performance sustained gaming." },
-          { "type": "Case",    "name": "Lian Li LANCOOL III Mesh RGB", "price": 120, "retailer": "Amazon UK", "affiliateUrl": "#", "why": "Three 140 mm fans pre-installed; airflow matches dedicated AIO cooling." }
+          { "type": "CPU",     "name": "AMD Ryzen 7 9700X",                         "price": 246, "retailer": "Scan",            "affiliateUrl": "#", "why": "Best gaming IPC on AM5; no multi-core bottleneck at 4K." },
+          { "type": "Cooler",  "name": "Arctic Liquid Freezer III 280",             "price": 90,  "retailer": "Amazon UK",       "affiliateUrl": "#", "why": "280 mm AIO keeps Ryzen 9700X cool and quiet under extended sessions." },
+          { "type": "Motherboard", "name": "ASUS ROG Strix X870-F WiFi",           "price": 340, "retailer": "Scan",            "affiliateUrl": "#", "why": "X870 with PCIe 5.0 GPU and M.2; excellent onboard audio for streamers." },
+          { "type": "RAM",     "name": "G.Skill Trident Z5 32 GB DDR5-7200 (2×16 GB)","price": 140,"retailer": "Scan",          "affiliateUrl": "#", "why": "DDR5-7200 OC kit delivers measurable fps gains in memory-sensitive titles." },
+          { "type": "GPU",     "name": "PALIT GeForce RTX 5080 GAMING PRO 16 GB GDDR7","price": 1100,"retailer": "Scan",        "affiliateUrl": "#", "why": "Flagship-adjacent rasterisation; well ahead of RTX 5070 Ti at 4K." },
+          { "type": "Storage", "name": "WD Black SN850X 2 TB PCIe 4.0",            "price": 150, "retailer": "Amazon UK",       "affiliateUrl": "#", "why": "High endurance 2 TB; sustains long game install libraries." },
+          { "type": "PSU",     "name": "Corsair HX1000 1000 W 80+ Platinum",        "price": 170, "retailer": "Scan",            "affiliateUrl": "#", "why": "Platinum efficiency reduces heat in high-performance sustained gaming." },
+          { "type": "Case",    "name": "Lian Li LANCOOL III Mesh RGB",              "price": 120, "retailer": "Amazon UK",       "affiliateUrl": "#", "why": "Three 140 mm fans pre-installed; airflow matches dedicated AIO cooling." }
         ],
-        "total": 2230,
+        "total": 2356,
         "performance": {
           "resolution": "4K 120 Hz / 1440p 240 Hz",
           "goodFor": ["4K 120 fps (DLSS Quality)", "1440p 240 Hz e-sports", "Unreal Engine 5 at 4K Medium", "Low-latency streaming + gaming simultaneously"],
           "struggles": ["4K 120 Hz Native Ultra without DLSS", "Professional ECC workloads"],
-          "upgradeNote": "RTX 5080 or 5090 will be a straight swap for PCIe 5.0 bandwidth gains."
+          "upgradeNote": "RTX 5090 will be the meaningful upgrade for 4K 120 Hz native RT Ultra."
         }
       }
     }
@@ -333,22 +333,22 @@
 
   "enthusiast": {
     "label": "Enthusiast Build",
-    "priceRange": [1801, 3000],
+    "priceRange": [2801, 6000],
     "useCases": {
       "gaming": {
         "parts": [
-          { "type": "CPU",     "name": "AMD Ryzen 9 9950X",          "price": 700, "retailer": "Scan",       "affiliateUrl": "#", "why": "Sixteen Zen 5 cores; eliminates any CPU bottleneck at 4K and excels in background tasks while gaming." },
-          { "type": "Cooler",  "name": "Custom 360 mm AIO (ASUS ROG Ryujin III 360)", "price": 200, "retailer": "Overclockers UK", "affiliateUrl": "#", "why": "Handles 170 W sustained with quiet fans; integrated LCD display." },
-          { "type": "Motherboard", "name": "ASUS ROG Crosshair X870E Hero", "price": 580, "retailer": "Scan", "affiliateUrl": "#", "why": "Flagship X870E; PCIe 5.0 GPU + NVMe, USB 4, 10 GbE, best-in-class VRM." },
-          { "type": "RAM",     "name": "G.Skill Trident Z5 Neo 64 GB DDR5-6000 (2×32 GB)", "price": 220, "retailer": "Scan", "affiliateUrl": "#", "why": "64 GB keeps background processes out of the way while gaming and streaming." },
-          { "type": "GPU",     "name": "NVIDIA GeForce RTX 5090",    "price": 1900, "retailer": "Scan",      "affiliateUrl": "#", "why": "GB202 flagship; fastest gaming GPU available with 32 GB GDDR7 and DLSS 4." },
-          { "type": "Storage", "name": "Samsung 9100 Pro 4 TB PCIe 5.0", "price": 380, "retailer": "Amazon UK", "affiliateUrl": "#", "why": "PCIe 5.0 NVMe at 14 GB/s read; near-instant shader compilation on first launch." },
-          { "type": "PSU",     "name": "Corsair AX1600i 1600 W 80+ Titanium", "price": 380, "retailer": "Scan", "affiliateUrl": "#", "why": "RTX 5090 TGP can reach 575 W; 1600 W with Titanium efficiency is the correct PSU." },
-          { "type": "Case",    "name": "Lian Li O11 Dynamic EVO XL",  "price": 160, "retailer": "Amazon UK",  "affiliateUrl": "#", "why": "Dual-chamber with space for a 480 mm top radiator upgrade." }
+          { "type": "CPU",     "name": "AMD Ryzen 9 9950X",                         "price": 447, "retailer": "Scan",            "affiliateUrl": "#", "why": "Sixteen Zen 5 cores; eliminates any CPU bottleneck at 4K and excels in background tasks while gaming." },
+          { "type": "Cooler",  "name": "ASUS ROG Ryujin III 360",                   "price": 200, "retailer": "Overclockers UK", "affiliateUrl": "#", "why": "Handles 170 W sustained with quiet fans; integrated LCD display." },
+          { "type": "Motherboard", "name": "ASUS ROG Crosshair X870E Hero",        "price": 580, "retailer": "Scan",            "affiliateUrl": "#", "why": "Flagship X870E; PCIe 5.0 GPU + NVMe, USB 4, 10 GbE, best-in-class VRM." },
+          { "type": "RAM",     "name": "G.Skill Trident Z5 Neo 64 GB DDR5-6000 (2×32 GB)","price": 220,"retailer": "Scan",      "affiliateUrl": "#", "why": "64 GB keeps background processes out of the way while gaming and streaming." },
+          { "type": "GPU",     "name": "ZOTAC GeForce RTX 5090 AMP Extreme INFINITY 32 GB GDDR7","price": 2760,"retailer": "Scan","affiliateUrl": "#", "why": "GB202 flagship with 32 GB GDDR7 and DLSS 4 Multi Frame Generation; the fastest gaming GPU available." },
+          { "type": "Storage", "name": "Samsung 9100 Pro 4 TB PCIe 5.0",           "price": 380, "retailer": "Amazon UK",       "affiliateUrl": "#", "why": "PCIe 5.0 NVMe at 14 GB/s read; near-instant shader compilation on first launch." },
+          { "type": "PSU",     "name": "Corsair AX1600i 1600 W 80+ Titanium",       "price": 380, "retailer": "Scan",            "affiliateUrl": "#", "why": "RTX 5090 TGP can reach 575 W; 1600 W with Titanium efficiency is the correct PSU choice." },
+          { "type": "Case",    "name": "Lian Li O11 Dynamic EVO XL",               "price": 160, "retailer": "Amazon UK",       "affiliateUrl": "#", "why": "Dual-chamber with space for a 480 mm top radiator upgrade." }
         ],
-        "total": 4520,
+        "total": 5127,
         "performance": {
-          "resolution": "4K 120 Hz native / 8K DLSS",
+          "resolution": "4K 120 Hz native / 8K DLSS 4",
           "goodFor": ["4K 120 fps Native Ultra (Cyberpunk 2077 RT Overdrive)", "8K DLSS Performance in supported titles", "VR 8K per-eye (upcoming headsets)", "Simultaneous 4K streaming + gaming"],
           "struggles": ["Nothing at this price tier — bottleneck is the display"],
           "upgradeNote": "Primary upgrade path is a higher-refresh 4K OLED monitor."
@@ -356,16 +356,16 @@
       },
       "office": {
         "parts": [
-          { "type": "CPU",     "name": "AMD Ryzen 9 9950X",          "price": 700, "retailer": "Scan",       "affiliateUrl": "#", "why": "Sixteen Zen 5 cores handle the largest financial and analytical datasets." },
-          { "type": "Cooler",  "name": "Noctua NH-D15S",             "price": 90,  "retailer": "Amazon UK",  "affiliateUrl": "#", "why": "Silent operation at 65 W typical office loads; no pump noise." },
-          { "type": "Motherboard", "name": "ASUS ProArt X870E-CREATOR WiFi", "price": 480, "retailer": "Overclockers UK", "affiliateUrl": "#", "why": "Dual Thunderbolt 4 and dual 10 GbE for NAS connections; ISV-certified." },
-          { "type": "RAM",     "name": "Kingston Server Premier 128 GB DDR5-4800 (4×32 GB)", "price": 440, "retailer": "Scan", "affiliateUrl": "#", "why": "ECC Unbuffered 128 GB enables large in-memory analytics and multiple VMs without swapping." },
-          { "type": "GPU",     "name": "NVIDIA RTX 5000 Ada Generation", "price": 2500, "retailer": "Scan",  "affiliateUrl": "#", "why": "32 GB ECC GDDR7; ISV-certified for AutoCAD, CATIA, and SolidWorks." },
-          { "type": "Storage", "name": "Samsung 990 Pro 4 TB PCIe 4.0 (×2, RAID 1)", "price": 560, "retailer": "Amazon UK", "affiliateUrl": "#", "why": "Mirror RAID provides redundancy for irreplaceable client data at speed." },
-          { "type": "PSU",     "name": "Corsair HX1200 1200 W 80+ Platinum", "price": 200, "retailer": "Scan", "affiliateUrl": "#", "why": "Professional workstation PSU rating; stable under sustained multi-socket load." },
-          { "type": "Case",    "name": "Fractal Design Define 7 XL",  "price": 180, "retailer": "Amazon UK",  "affiliateUrl": "#", "why": "Sound-dampened full-tower; room for all drives and cable management." }
+          { "type": "CPU",     "name": "AMD Ryzen 9 9950X",                         "price": 447, "retailer": "Scan",            "affiliateUrl": "#", "why": "Sixteen Zen 5 cores handle the largest financial and analytical datasets." },
+          { "type": "Cooler",  "name": "Noctua NH-D15S",                            "price": 90,  "retailer": "Amazon UK",       "affiliateUrl": "#", "why": "Silent operation at 65 W typical office loads; no pump noise." },
+          { "type": "Motherboard", "name": "ASUS ProArt X870E-CREATOR WiFi",       "price": 480, "retailer": "Overclockers UK", "affiliateUrl": "#", "why": "Dual Thunderbolt 4 and dual 10 GbE for NAS connections; ISV-certified." },
+          { "type": "RAM",     "name": "Kingston Server Premier 128 GB DDR5-4800 (4×32 GB)","price": 440,"retailer": "Scan",     "affiliateUrl": "#", "why": "128 GB enables large in-memory analytics and multiple VMs without swapping." },
+          { "type": "GPU",     "name": "PALIT GeForce RTX 5080 GAMING PRO 16 GB GDDR7","price": 1100,"retailer": "Scan",        "affiliateUrl": "#", "why": "16 GB GDDR7 drives up to four 8K displays and handles GPU-accelerated analytics workloads." },
+          { "type": "Storage", "name": "Samsung 990 Pro 4 TB PCIe 4.0 (×2, RAID 1)","price": 560,"retailer": "Amazon UK",       "affiliateUrl": "#", "why": "Mirror RAID provides redundancy for irreplaceable client data at speed." },
+          { "type": "PSU",     "name": "Corsair HX1200 1200 W 80+ Platinum",        "price": 200, "retailer": "Scan",            "affiliateUrl": "#", "why": "Professional workstation PSU rating; stable under sustained multi-socket load." },
+          { "type": "Case",    "name": "Fractal Design Define 7 XL",               "price": 180, "retailer": "Amazon UK",       "affiliateUrl": "#", "why": "Sound-dampened full-tower; room for all drives and cable management." }
         ],
-        "total": 5150,
+        "total": 3497,
         "performance": {
           "resolution": "Six 4K monitors",
           "goodFor": ["Bloomberg / multi-screen trading desks", "200 M row Power BI models", "Multiple simultaneous VMs (Hyper-V / VMware Workstation)", "4K/8K video conferencing"],
@@ -375,40 +375,40 @@
       },
       "creation": {
         "parts": [
-          { "type": "CPU",     "name": "AMD Ryzen 9 9950X",          "price": 700, "retailer": "Scan",       "affiliateUrl": "#", "why": "Sixteen Zen 5 cores offer the best multi-threaded video export on AM5." },
-          { "type": "Cooler",  "name": "Arctic Liquid Freezer III 420", "price": 140, "retailer": "Amazon UK", "affiliateUrl": "#", "why": "420 mm radiator sustains 170 W all-core indefinitely with minimal fan noise." },
-          { "type": "Motherboard", "name": "ASUS ROG Crosshair X870E Hero", "price": 580, "retailer": "Scan", "affiliateUrl": "#", "why": "Four PCIe 4.0 M.2 slots; supports dual GPU for future multi-GPU workflows." },
-          { "type": "RAM",     "name": "G.Skill Trident Z5 128 GB DDR5-6400 (4×32 GB)", "price": 480, "retailer": "Scan", "affiliateUrl": "#", "why": "128 GB eliminates After Effects purge warnings on complex 4K multi-layer comps." },
-          { "type": "GPU",     "name": "NVIDIA GeForce RTX 5090",    "price": 1900, "retailer": "Scan",      "affiliateUrl": "#", "why": "32 GB GDDR7 VRAM handles 8K RAW debayer in DaVinci Resolve Studio in real time." },
-          { "type": "Storage", "name": "Samsung 9100 Pro 4 TB PCIe 5.0", "price": 380, "retailer": "Amazon UK", "affiliateUrl": "#", "why": "14 GB/s NVMe sustains 8K RAW ingest without dropped frames." },
-          { "type": "PSU",     "name": "Corsair AX1600i 1600 W 80+ Titanium", "price": 380, "retailer": "Scan", "affiliateUrl": "#", "why": "170 W CPU + 575 W GPU sustained render load; Titanium keeps heat low." },
-          { "type": "Case",    "name": "Lian Li O11D EVO RGB",        "price": 160, "retailer": "Amazon UK",  "affiliateUrl": "#", "why": "Dual-chamber; two 360 mm rad slots allow full CPU + GPU water cooling." }
+          { "type": "CPU",     "name": "AMD Ryzen 9 9950X",                         "price": 447, "retailer": "Scan",            "affiliateUrl": "#", "why": "Sixteen Zen 5 cores offer the best multi-threaded video export on AM5." },
+          { "type": "Cooler",  "name": "Arctic Liquid Freezer III 420",             "price": 140, "retailer": "Amazon UK",       "affiliateUrl": "#", "why": "420 mm radiator sustains 170 W all-core indefinitely with minimal fan noise." },
+          { "type": "Motherboard", "name": "ASUS ROG Crosshair X870E Hero",        "price": 580, "retailer": "Scan",            "affiliateUrl": "#", "why": "Four PCIe 4.0 M.2 slots; supports full PCIe 5.0 bandwidth for storage." },
+          { "type": "RAM",     "name": "G.Skill Trident Z5 128 GB DDR5-6400 (4×32 GB)","price": 480,"retailer": "Scan",         "affiliateUrl": "#", "why": "128 GB eliminates After Effects purge warnings on complex 4K multi-layer comps." },
+          { "type": "GPU",     "name": "ZOTAC GeForce RTX 5090 AMP Extreme INFINITY 32 GB GDDR7","price": 2760,"retailer": "Scan","affiliateUrl": "#", "why": "32 GB GDDR7 VRAM handles 8K RAW debayer in DaVinci Resolve Studio in real time." },
+          { "type": "Storage", "name": "Samsung 9100 Pro 4 TB PCIe 5.0",           "price": 380, "retailer": "Amazon UK",       "affiliateUrl": "#", "why": "14 GB/s NVMe sustains 8K RAW ingest without dropped frames." },
+          { "type": "PSU",     "name": "Corsair AX1600i 1600 W 80+ Titanium",       "price": 380, "retailer": "Scan",            "affiliateUrl": "#", "why": "170 W CPU + 575 W GPU sustained render load; Titanium keeps heat and energy cost low." },
+          { "type": "Case",    "name": "Lian Li O11D EVO RGB",                      "price": 160, "retailer": "Amazon UK",       "affiliateUrl": "#", "why": "Dual-chamber; two 360 mm rad slots allow full CPU + GPU water cooling." }
         ],
-        "total": 4720,
+        "total": 5327,
         "performance": {
           "resolution": "8K RAW",
           "goodFor": ["8K RAW Resolve Studio realtime grading", "Stable Diffusion SDXL batch inference", "Octane / Arnold GPU rendering", "AI video upscaling (Topaz Video AI)"],
           "struggles": ["Very little — GPU VRAM at 32 GB is the only frontier"],
-          "upgradeNote": "Dual RTX 5090 via NVLink (if supported by driver) doubles effective VRAM for generative AI."
+          "upgradeNote": "128 GB RAM provides complete safety margin for complex multi-layer 8K compositing."
         }
       },
       "performance": {
         "parts": [
-          { "type": "CPU",     "name": "AMD Ryzen 9 9900X3D",        "price": 600, "retailer": "Scan",       "affiliateUrl": "#", "why": "3D V-Cache on Zen 5 delivers the highest gaming IPC and cache-sensitive workload performance." },
-          { "type": "Cooler",  "name": "Arctic Liquid Freezer III 360", "price": 110, "retailer": "Amazon UK", "affiliateUrl": "#", "why": "Keeps the 3D V-Cache die within thermal limits under sustained gaming." },
-          { "type": "Motherboard", "name": "ASUS ROG Crosshair X870E Hero", "price": 580, "retailer": "Scan", "affiliateUrl": "#", "why": "X870E for full PCIe 5.0 bandwidth; best VRM headroom for 9000X3D." },
-          { "type": "RAM",     "name": "G.Skill Trident Z5 Neo 64 GB DDR5-6000 (2×32 GB)", "price": 220, "retailer": "Scan", "affiliateUrl": "#", "why": "CL30 6000 MT/s; AMD EXPO tuned for minimum-latency cache communication." },
-          { "type": "GPU",     "name": "NVIDIA GeForce RTX 5090",    "price": 1900, "retailer": "Scan",      "affiliateUrl": "#", "why": "32 GB GDDR7; no GPU bottleneck when paired with the fastest gaming CPU." },
-          { "type": "Storage", "name": "Samsung 9100 Pro 2 TB PCIe 5.0", "price": 230, "retailer": "Amazon UK", "affiliateUrl": "#", "why": "PCIe 5.0 saturates DirectStorage bandwidth for next-gen title loading." },
-          { "type": "PSU",     "name": "Corsair AX1600i 1600 W 80+ Titanium", "price": 380, "retailer": "Scan", "affiliateUrl": "#", "why": "Headroom for two cards or future power-hungry GPUs." },
-          { "type": "Case",    "name": "Lian Li O11D EVO RGB",        "price": 160, "retailer": "Amazon UK",  "affiliateUrl": "#", "why": "360 mm radiator mount; premium build quality for a flagship system." }
+          { "type": "CPU",     "name": "AMD Ryzen 7 9800X3D",                       "price": 380, "retailer": "Scan",            "affiliateUrl": "#", "why": "8-core Zen 5 with 3D V-Cache; the highest gaming IPC on AM5 — designed specifically for gaming and cache-sensitive workloads." },
+          { "type": "Cooler",  "name": "Arctic Liquid Freezer III 360",             "price": 110, "retailer": "Amazon UK",       "affiliateUrl": "#", "why": "Keeps the 3D V-Cache die within thermal limits under sustained gaming." },
+          { "type": "Motherboard", "name": "ASUS ROG Crosshair X870E Hero",        "price": 580, "retailer": "Scan",            "affiliateUrl": "#", "why": "X870E for full PCIe 5.0 bandwidth; best VRM headroom for 9000X3D." },
+          { "type": "RAM",     "name": "G.Skill Trident Z5 Neo 64 GB DDR5-6000 (2×32 GB)","price": 220,"retailer": "Scan",      "affiliateUrl": "#", "why": "CL30 6000 MT/s; AMD EXPO tuned for minimum-latency cache communication." },
+          { "type": "GPU",     "name": "ZOTAC GeForce RTX 5090 AMP Extreme INFINITY 32 GB GDDR7","price": 2760,"retailer": "Scan","affiliateUrl": "#", "why": "32 GB GDDR7; no GPU bottleneck when paired with the fastest gaming CPU on AM5." },
+          { "type": "Storage", "name": "Samsung 9100 Pro 2 TB PCIe 5.0",           "price": 230, "retailer": "Amazon UK",       "affiliateUrl": "#", "why": "PCIe 5.0 saturates DirectStorage bandwidth for next-gen title loading." },
+          { "type": "PSU",     "name": "Corsair AX1600i 1600 W 80+ Titanium",       "price": 380, "retailer": "Scan",            "affiliateUrl": "#", "why": "Headroom for future power-hungry GPUs; Titanium efficiency at sustained loads." },
+          { "type": "Case",    "name": "Lian Li O11D EVO RGB",                      "price": 160, "retailer": "Amazon UK",       "affiliateUrl": "#", "why": "360 mm radiator mount; premium build quality for a flagship system." }
         ],
-        "total": 4180,
+        "total": 4820,
         "performance": {
           "resolution": "4K 144 Hz native / 8K DLSS 4",
           "goodFor": ["Highest fps in any title — no CPU or GPU bottleneck", "DirectStorage saturated loading", "4K 144 Hz Native Ultra (Rasterisation)", "Generative AI CUDA workloads alongside gaming"],
           "struggles": ["No meaningful performance gap above this tier exists currently"],
-          "upgradeNote": "This is the peak consumer tier — next meaningful upgrade is a new platform generation."
+          "upgradeNote": "This is the peak consumer gaming tier — next meaningful upgrade is a new platform generation."
         }
       }
     }
