@@ -497,14 +497,14 @@ export default function BuilderClient() {
             </button>
 
             {controlsOpen && (
-              <div className="border-t border-[#1E293B] px-6 pb-6 pt-5 flex flex-col gap-6">
+              <div className="border-t border-[#1E293B] px-6 pb-8 pt-6 flex flex-col gap-8">
 
                 {/* Budget slider */}
                 <div>
-                  <div className="flex items-center justify-between gap-4 mb-4">
-                    <span className="text-sm font-medium text-[#94A3B8]">Budget</span>
-                    <div className="flex items-center gap-1.5">
-                      <span className="text-white font-bold text-xl">£</span>
+                  <div className="flex items-center justify-between gap-4 mb-5">
+                    <span className="text-base font-semibold text-white">Your budget</span>
+                    <div className="flex items-center gap-1">
+                      <span className="text-[#2563EB] font-extrabold text-2xl">£</span>
                       <input
                         type="number"
                         min={MIN}
@@ -514,7 +514,7 @@ export default function BuilderClient() {
                         onChange={onNumberChange}
                         onBlur={onNumberBlur}
                         aria-label="Budget in pounds"
-                        className="w-24 bg-[#0F172A] border border-[#334155] focus:border-[#2563EB] text-white font-bold text-xl text-right rounded-xl px-3 py-1.5 focus:outline-none transition-colors tabular-nums"
+                        className="w-28 bg-[#0F172A] border border-[#334155] focus:border-[#2563EB] text-white font-extrabold text-2xl text-right rounded-xl px-3 py-2 focus:outline-none transition-colors tabular-nums"
                       />
                     </div>
                   </div>
@@ -527,21 +527,21 @@ export default function BuilderClient() {
                     value={budget}
                     onChange={onRangeChange}
                     aria-label="Budget slider"
-                    className="hero-slider w-full h-2 rounded-full appearance-none cursor-pointer mb-3"
+                    className="hero-slider w-full h-3 rounded-full appearance-none cursor-pointer mb-4"
                     style={{
                       background: `linear-gradient(to right, #2563EB ${sliderPct}%, #1E293B ${sliderPct}%)`,
                     }}
                   />
-                  <div className="flex justify-between text-xs text-[#94A3B8] mb-2">
+                  <div className="flex justify-between text-xs text-[#64748B] mb-3">
                     <span>£300</span>
                     <span>£1,000</span>
                     <span>£2,000</span>
                     <span>£3,000</span>
                   </div>
 
-                  <div className="flex items-center gap-2 mt-3">
-                    <span className="text-xs text-[#64748B]">Tier:</span>
-                    <span className={clsx("text-xs font-semibold px-2.5 py-1 rounded-full", tierMeta.pill)}>
+                  <div className="flex items-center gap-2">
+                    <span className="text-sm text-[#64748B]">Tier:</span>
+                    <span className={clsx("text-xs font-semibold px-3 py-1 rounded-full", tierMeta.pill)}>
                       {tierMeta.label}
                     </span>
                   </div>
@@ -549,8 +549,8 @@ export default function BuilderClient() {
 
                 {/* Use-case selector */}
                 <div>
-                  <p className="text-sm font-medium text-[#94A3B8] mb-3">Use case</p>
-                  <div className="grid grid-cols-2 gap-2">
+                  <p className="text-base font-semibold text-white mb-4">Use case</p>
+                  <div className="grid grid-cols-2 gap-3">
                     {USE_CASES.map(({ id, label, desc, Icon }) => {
                       const active = useCase === id;
                       return (
@@ -559,23 +559,23 @@ export default function BuilderClient() {
                           onClick={() => setUseCase(id)}
                           aria-pressed={active}
                           className={clsx(
-                            "flex items-start gap-3 p-3 rounded-xl border-2 text-left transition-all duration-150",
+                            "flex items-center gap-4 p-4 rounded-xl border-2 text-left transition-all duration-150",
                             active
                               ? "border-blue-500 bg-blue-500/10"
                               : "border-[#334155] bg-[#0F172A]/40 hover:border-[#475569]"
                           )}
                         >
                           <div className={clsx(
-                            "flex items-center justify-center w-9 h-9 rounded-lg shrink-0",
+                            "flex items-center justify-center w-11 h-11 rounded-xl shrink-0",
                             active ? "bg-blue-500/20" : "bg-[#1E293B]"
                           )}>
-                            <Icon className={clsx("w-4 h-4", active ? "text-blue-400" : "text-[#94A3B8]")} aria-hidden />
+                            <Icon className={clsx("w-5 h-5", active ? "text-blue-400" : "text-[#94A3B8]")} aria-hidden />
                           </div>
-                          <div className="mt-0.5">
-                            <p className={clsx("font-semibold text-xs", active ? "text-white" : "text-[#CBD5E1]")}>
+                          <div>
+                            <p className={clsx("font-semibold text-sm", active ? "text-white" : "text-[#CBD5E1]")}>
                               {label}
                             </p>
-                            <p className="text-xs text-[#64748B] mt-0.5 leading-tight">{desc}</p>
+                            <p className="text-xs text-[#64748B] mt-0.5 leading-snug">{desc}</p>
                           </div>
                         </button>
                       );
